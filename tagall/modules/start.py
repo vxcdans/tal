@@ -71,7 +71,7 @@ def memek():
             InlineKeyboardButton(text="Tutup", callback_data=f"balik")
         ],
         [
-            InlineKeyboardButton(text="Devs Ganteng", url=f"http://t.me/Darenrorr")
+            InlineKeyboardButton(text="Developer", url=f"http://t.me/Darenrorr")
         ],
     ]
 
