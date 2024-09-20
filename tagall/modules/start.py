@@ -26,7 +26,10 @@ inlinegc = InlineKeyboardMarkup(
 inline = InlineKeyboardMarkup(
     [
         [
-                    InlineKeyboardButton(text="Support", url="https://t.me/darensupport"),
+                    InlineKeyboardButton(text="Berlangganan", url="https://t.me/darensupport")
+        ],
+        [
+                    InlineKeyboardButton(text="List Bot", callback_data=f"botgua")
                     InlineKeyboardButton(text="Channel", url="https://t.me/cehadaren")
         ],
         [
@@ -138,7 +141,7 @@ async def oner_cbq(client: Bot, query: CallbackQuery):
     )
 
 @Bot.on_callback_query(filters.regex(r"botgua"))
-async def help_cbq(client: Bot, query: CallbackQuery):
+async def botgua_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(anjing())
     text = """<blockquote>BOT SI DAREEN</blockquote>
 
