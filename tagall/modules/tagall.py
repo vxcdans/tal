@@ -49,7 +49,7 @@ async def tagall(client, message: Message):
     args = get_arg(message)
     if not args:
         args = "Hi!"
-    spam_chats.append(chat_id)
+    SPAM_CHATS.append(chat_id)
     usrnum = 0
     usrtxt = ""
     m = client.get_chat_members(chat_id)
