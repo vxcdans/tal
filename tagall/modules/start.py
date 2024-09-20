@@ -59,7 +59,8 @@ def admin_panel():
 def anjing():
     buttons = [
         [
-            InlineKeyboardButton(text="Tutup", callback_data=f"balik")
+            InlineKeyboardButton(text="List Bot", callback_data=f"botgua")
+            InlineKeyboardButton(text="Close",callback_data=f"Balik")
         ],
     ]
 
@@ -131,6 +132,27 @@ async def help_cbq(client: Bot, query: CallbackQuery):
 async def oner_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(memek())
     text = """<blockquote>**WOY ANJING BUTTON DI BAWAH ITU BUAT TAU SIAPA YANG BUAT BOT INI YA KONTOL.\nMINIMAL TERIMA KASIH JUGA KEG TOLOL KARNA UDAH DI BUATIN BOT KEREN KAYAA GUAA ANJAAYYY**</blockquote>"""
+    await query.edit_message_text(
+        text = text,
+        reply_markup = btn
+    )
+
+@Bot.on_callback_query(filters.regex(r"botgua"))
+async def help_cbq(client: Bot, query: CallbackQuery):
+    btn = InlineKeyboardMarkup(anjing())
+    text = """<blockquote>BOT SI DAREEN</blockquote>
+
+<blockquote> Anti Gcast 
+@bukanantigcastbot</blockquote>
+
+<blockquote> Ai Chatbot 
+@jancokchatbot</blockquote>
+
+<blockquote> String Session 
+@Dareenstringbot</blockquote>
+
+<blockquote> Mention/Tagall 
+@Differenmentionbot</blockquote>"""
     await query.edit_message_text(
         text = text,
         reply_markup = btn
