@@ -26,10 +26,7 @@ inlinegc = InlineKeyboardMarkup(
 inline = InlineKeyboardMarkup(
     [
         [
-                    InlineKeyboardButton(text="Berlangganan", url="https://t.me/darensupport")
-        ],
-        [
-                    InlineKeyboardButton(text="List Bot", callback_data=f"botgua"),
+                    InlineKeyboardButton(text="Support", url="https://t.me/darensupport"),
                     InlineKeyboardButton(text="Channel", url="https://t.me/cehadaren")
         ],
         [
@@ -76,6 +73,15 @@ def memek():
         ],
         [
             InlineKeyboardButton(text="Developer", url=f"http://t.me/Darenrorr")
+        ],
+    ]
+
+    return buttons
+
+def tolol():
+    buttons = [
+        [
+            InlineKeyboardButton(text="Close",callback_data=f"Balik")
         ],
     ]
 
@@ -142,7 +148,7 @@ async def oner_cbq(client: Bot, query: CallbackQuery):
 
 @Bot.on_callback_query(filters.regex(r"botgua"))
 async def botgua_cbq(client: Bot, query: CallbackQuery):
-    btn = InlineKeyboardMarkup(anjing())
+    btn = InlineKeyboardMarkup(tolol())
     text = """<blockquote>BOT SI DAREEN</blockquote>
 
 <blockquote> Anti Gcast 
