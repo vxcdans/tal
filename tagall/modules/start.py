@@ -62,7 +62,7 @@ def admin_panel():
 def anjing():
     buttons = [
         [
-            InlineKeyboardButton(text="List Bot", callback_data=f"botgua")
+            InlineKeyboardButton(text="List Bot", callback_data=f"botgua"),
             InlineKeyboardButton(text="Close",callback_data=f"Balik")
         ],
     ]
