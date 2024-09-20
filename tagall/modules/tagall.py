@@ -43,32 +43,45 @@ async def isAdmin(filter, client, update):
 Admin = filters.create(isAdmin)
 
 @Bot.on_message(filters.command("tag") & filters.group & Admin)
-async def tagall(client, message: Message):
-    await message.delete()
-    chat_id = message.chat.id
-    args = get_arg(message)
-    if not args:
-        args = "Hi!"
-    SPAM_CHATS.append(chat_id)
-    usrnum = 0
-    usrtxt = ""
-    m = client.get_chat_members(chat_id)
-    async for usr in m:
-        if not chat_id in spam_chats:
-            break
-        usrnum += 1
-        usrtxt += f"<blockquote>[{random.choice(emoji)}](tg://user?id={usr.user.id}) </blockquote>"
-        if usrnum == 8:
-            txt = f"<blockquote>**{args}**\n\n{usrtxt}</blockquote>"
-            try:
-                await client.send_message(chat_id, txt)
-            except FloodWait as e:
-                await sleep(e.value)
-                await client.send_message(chat_id, txt)
+async def tag_all_users(_,message): 
+    replied = message.reply_to_message  
+    if len(message.command) < 2 and not replied:
+        await message.reply_text("<blockquote>**KASIH GUA KATA KATA YANG MAU DI TAG ALL ANJENG**</blockquote>") 
+        return                  
+    if replied:
+        SPAM_CHATS.append(message.chat.id)      
+        usernum= 0
+        usertxt = ""
+        async for m in app.get_chat_members(message.chat.id): 
+            if message.chat.id not in SPAM_CHATS:
+                break       
+            usernum += 8
+            usertxt += f" [{m.user.first_name}](tg://user?id={m.user.id})) "
+            if usernum == 1:
+                await replied.reply_text(usertxt)
+                await asyncio.sleep(2)
+                usernum = 0
+                usertxt = ""
+        try :
+            SPAM_CHATS.remove(message.chat.id)
+        except Exception:
+            pass
+    else:
+        text = message.text.split(None, 1)[1]
 
-            await sleep(2)
-            usrnum = 0
-            usrtxt = ""               
+        SPAM_CHATS.append(message.chat.id)
+        usernum= 0
+        usertxt = ""
+        async for m in app.get_chat_members(message.chat.id):       
+            if message.chat.id not in SPAM_CHATS:
+                break 
+            usernum += 1
+            usertxt += f"{random.choice(emoji)} [{m.user.first_name}](tg://user?id={m.user.id})\n"
+            if usernum == 7:
+                await app.send_message(message.chat.id,f'{text}\n{usertxt}')
+                await asyncio.sleep(1)
+                usernum = 0
+                usertxt = ""                          
         try :
             SPAM_CHATS.remove(message.chat.id)
         except Exception:
