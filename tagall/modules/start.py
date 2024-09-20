@@ -29,7 +29,7 @@ inline = InlineKeyboardMarkup(
                     InlineKeyboardButton(text="Berlangganan", url="https://t.me/darensupport")
         ],
         [
-                    InlineKeyboardButton(text="List Bot", callback_data=f"botgua")
+                    InlineKeyboardButton(text="List Bot", callback_data=f"botgua"),
                     InlineKeyboardButton(text="Channel", url="https://t.me/cehadaren")
         ],
         [
