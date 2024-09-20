@@ -14,5 +14,4 @@ async def isAdmin(filter, client, update):
 
     return member.status in [STATUS.OWNER, STATUS.ADMINISTRATOR]
 
-Member = filters.create(isMember)
 Admin = filters.create(isAdmin)
