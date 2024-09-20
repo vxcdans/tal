@@ -11,3 +11,5 @@
 </div>
 
 </details>
+
+<blockquote>[CONTRIBUTOR ASU](https://github.com/mikeel-ye/mention/graphs/contributors) MINIMAL MAKASIH ANJING SAMA CONTRIBUTOR NYA MEMEK LO </blockquote>
