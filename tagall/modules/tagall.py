@@ -20,16 +20,6 @@ emoji = "😀 😃 😄 😁 😆 😅 😂 🤣 😭 😗 😙 😚 😘 🥰 �
     " "
 )
 
-async def isAdmin(filter, client, update):
-    try:
-        member = await client.get_chat_member(chat_id=update.chat.id, user_id=update.from_user.id)
-    except UserNotParticipant:
-        return False
-    except:
-        return False
-
-    return member.status in [STATUS.OWNER, STATUS.ADMINISTRATOR]
-
 Admin = filters.create(isAdmin)
 
 @Bot.on_message(filters.command("tag") & filters.group & Admin)
