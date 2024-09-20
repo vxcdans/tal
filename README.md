@@ -1,2 +1,1 @@
-# mention
-Ini Repo Mention/Tagall kalo Mau Pake Ya pake Tapi Minimal Sebagai Tanda Terima kasih kasih star nya memeg
+# INI REPO TAG ALL MINIMAL KALO LU AMBIL JANGAN LUPA KASIH STAR TOLOL LU GA NGASIH STAR KAGAK JADI DAGING ITU DUIT LU EGE
