@@ -1,4 +1,4 @@
-# Ini Repo Mention/Tagall kalo Mau Pake Ya pake Tapi Minimal Sebagai Tanda Terima Kasih, Kasih Repo Ini Star Memeg
+<blockquote>Ini Repo Mention/Tagall kalo Mau Pake Ya pake Tapi Minimal Sebagai Tanda Terima Kasih, Kasih Repo Ini Star Memeg</blockquote>
 
 
 <details>
@@ -14,4 +14,4 @@
 
 
 
-<blockquote>[CONTRIBUTOR ASU](https://github.com/mikeel-ye/mention/graphs/contributors) MINIMAL MAKASIH ANJING SAMA CONTRIBUTOR NYA MEMEK LO </blockquote>
+<b>[CONTRIBUTOR ASU](https://github.com/mikeel-ye/mention/graphs/contributors) MINIMAL MAKASIH ANJING SAMA CONTRIBUTOR NYA MEMEK LO </b>
