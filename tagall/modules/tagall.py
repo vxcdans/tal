@@ -22,7 +22,7 @@ emoji = "😀 😃 😄 😁 😆 😅 😂 🤣 😭 😗 😙 😚 😘 🥰 �
 
 Admin = filters.create(isAdmin)
 
-@Bot.on_message(filters.command("tag") & filters.group & Admin)
+@Bot.on_message(filters.command("tag") & filters.group & admin_filters)
 async def tag_all_users(_,message): 
     replied = message.reply_to_message  
     if len(message.command) < 2 and not replied:
