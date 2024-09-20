@@ -60,7 +60,7 @@ def anjing():
     buttons = [
         [
             InlineKeyboardButton(text="List Bot", callback_data=f"botgua"),
-            InlineKeyboardButton(text="Close",callback_data=f"Balik")
+            InlineKeyboardButton(text="Tutup",callback_data=f"Balik")
         ],
     ]
 
@@ -81,7 +81,7 @@ def memek():
 def tolol():
     buttons = [
         [
-            InlineKeyboardButton(text="Close",callback_data=f"Balik")
+            InlineKeyboardButton(text="Tutup",callback_data=f"Balik")
         ],
     ]
 
@@ -149,19 +149,19 @@ async def oner_cbq(client: Bot, query: CallbackQuery):
 @Bot.on_callback_query(filters.regex(r"botgua"))
 async def botgua_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(tolol())
-    text = """<blockquote>BOT SI DAREEN</blockquote>
+    text = """<blockquote>**List Bot Si Daren**</blockquote>
 
-<blockquote> Anti Gcast 
-@bukanantigcastbot</blockquote>
+<blockquote>**Anti Gcast 
+@bukanantigcastbot**</blockquote>
 
-<blockquote> Ai Chatbot 
-@jancokchatbot</blockquote>
+<blockquote>**Ai Chatbot 
+@jancokchatbot**</blockquote>
 
-<blockquote> String Session 
-@Dareenstringbot</blockquote>
+<blockquote>**String Session 
+@Dareenstringbot**</blockquote>
 
-<blockquote> Mention/Tagall 
-@Differenmentionbot</blockquote>"""
+<blockquote>**Mention/Tagall 
+@Differenmentionbot**</blockquote>"""
     await query.edit_message_text(
         text = text,
         reply_markup = btn
