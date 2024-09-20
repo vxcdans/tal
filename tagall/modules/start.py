@@ -115,7 +115,7 @@ async def balik_cbq(client: Bot, query: CallbackQuery):
 @Bot.on_callback_query(filters.regex(r"help"))
 async def help_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(anjing())
-    text = """<blockquote>**Menu Bantuan Bot Anti Gcast Ini**</blockquote>
+    text = """<blockquote>**Menu Bantuan Bot Tagall Ini**</blockquote>
 
 <blockquote>/tag : **UNTUK MENTION MEMBER LA GOBLOK**
 
