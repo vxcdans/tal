@@ -60,7 +60,7 @@ def anjing():
     buttons = [
         [
             InlineKeyboardButton(text="List Bot", callback_data=f"botgua"),
-            InlineKeyboardButton(text="Tutup",callback_data=f"Balik")
+            InlineKeyboardButton(text="Tutup",callback_data=f"balik")
         ],
     ]
 
@@ -81,7 +81,7 @@ def memek():
 def tolol():
     buttons = [
         [
-            InlineKeyboardButton(text="Tutup",callback_data=f"Balik")
+            InlineKeyboardButton(text="Tutup",callback_data=f"balik")
         ],
     ]
 
@@ -101,7 +101,7 @@ async def start_msgmessag(app : Bot, message : Message):
             await asyncio.sleep(e.value)
             await message.reply(text=msg, reply_markup=inline)
     elif chat_type in [CTYPE.GROUP, CTYPE.SUPERGROUP]:
-        msg = f"<blockquote>**Woy Goblok!**\n\n__Jadiin Gua Admin Dulu Anjing Kalo Kagak Di Jadiin Admin Mana Bisa Mention Member Di Gruop Jelek Lo Ini😡, Biar Ngurangin Gikesan Ampas Di Group Lu Ya Kontol!__\n\nCreated by {OWNER_NAME}</blockquote>"
+        msg = f"<blockquote>**Woy Goblok!**\n\n**Jaadiin Gua Admin Dulu Anjing Kalo Kagak Di Jadiin Admin Mana Bisa Mention Member Di Gruop Jelek Lo Ini😡, Kalo Gatau Cara Gunainnya Banyakin Amal Dulu Lu Kocak\n\nCreated by {OWNER_NAME}**</blockquote>"
 
         try:
             await message.reply(text=msg, reply_markup=inlinegc)
