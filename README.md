@@ -1,4 +1,8 @@
-<blockquote>Ini Repo Mention/Tagall kalo Mau Pake Ya pake Tapi Minimal Sebagai Tanda Terima Kasih, Kasih Repo Ini Star Memeg</blockquote>
+```Ini Repo Mention/Tagall kalo Mau Pake Ya pake Tapi Minimal Sebagai Tanda Terima Kasih, Kasih Repo Ini Star Memeg```
+
+
+<p align="center">
+  <img src="https://itzpire.com/file/c7b2648ba8ac.jpg">
 
 
 <details>
