@@ -69,7 +69,7 @@ async def tag_all_users(_,message):
             usertxt += f"{random.choice(emoji)} [{m.user.first_name}](tg://user?id={m.user.id})\n"
             if usernum == 7:
                 await app.send_message(message.chat.id,f'{text}\n{usertxt}')
-                await asyncio.sleep(1)
+                await asyncio.sleep(5)
                 usernum = 0
                 usertxt = ""                          
         try :
