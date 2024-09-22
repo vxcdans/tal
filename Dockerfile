@@ -12,4 +12,4 @@ RUN pip3 install -r requirements.txt
 
 #set a default command
 
-CMD bash start
+CMD ["python3", "-m", "tagall"]
