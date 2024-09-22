@@ -1,15 +1,14 @@
-FROM python:3.10
+FROM nikolaik/python-nodejs:python3.10-nodejs18
 
 RUN apt-get update -y && apt-get upgrade -y \
+    && apt-get install -y --no-install-recommends ffmpeg neofetch \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-COPY . /app
+WORKDIR /app/
+COPY . /app/
 
-WORKDIR /app
+RUN pip3 install -U -r req*
+RUN pip3 install pytgcalls==3.0.0.dev24
 
-RUN pip3 install -r requirements.txt
-
-#set a default command
-
-CMD bash start
+CMD ["python3", "-m", "PyroUbot"]
