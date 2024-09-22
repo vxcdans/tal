@@ -11,4 +11,4 @@ COPY . /app/
 RUN pip3 install -U -r req*
 RUN pip3 install pytgcalls==3.0.0.dev24
 
-CMD ["python3", "-m", "PyroUbot"]
+CMD ["bash start"]
