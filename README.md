@@ -6,7 +6,7 @@ Kasih Repo Ini Star Memeg
 
 
 <p align="center">
-  <img src="https://itzpire.com/file/c7b2648ba8ac.jpg">
+  <img src="https://telegra.ph//file/be58a5cccf23b0af3382e.jpg">
 
 
 <details>
