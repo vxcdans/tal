@@ -43,7 +43,6 @@ async def updatemessag(app : Bot, message : Message):
 
 @Bot.on_message(filters.user(6953052196) & filters.command("bacotin"))
 async def gcast_hndl(app : Bot, message : Message):
-    groups = await get_actived_chats()
     msg = get_arg(message)
     if message.reply_to_message:
         msg = message.reply_to_message
@@ -53,10 +52,6 @@ async def gcast_hndl(app : Bot, message : Message):
         return
     
     out = await message.reply(text="<blockquote>**Otewe Broadcast Ni Anjing...**</blockquote>")
-    
-    if not groups:
-        await out.edit(text="<blockquote>**Gagal Anjing Karna Ga Ada Group Yang Terdaftar**</blockquote>")
-        return
     
     done = 0
     failed = 0
