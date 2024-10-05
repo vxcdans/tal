@@ -55,7 +55,7 @@ async def gcast_hndl(app : Bot, message : Message):
     
     done = 0
     failed = 0
-    for group in groups:
+    for group in group:
         try:
             await send_msg(group, message=msg)
             done += 1
