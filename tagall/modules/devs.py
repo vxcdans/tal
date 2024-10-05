@@ -57,9 +57,9 @@ async def gcast_hndl(app : Bot, message : Message):
     done = 0
     failed = 0
     await send_msg(group, message=msg)
-            done += 1
-        except:
-            failed += 1
+    done += 1
+  except:
+    failed += 1
     await out.edit(f"<blockquote>**Berhasil Mengirim Pesan Ke {done} Group.**\n**Gagal Mengirim Pesan Ke {failed} Group.**</blockquote>")
 
 async def aexec(code, client, message):
