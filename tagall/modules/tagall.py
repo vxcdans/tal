@@ -57,9 +57,9 @@ async def tag_all_users(_,message):
                 break 
             usernum += 1
             usertxt += f"{random.choice(emoji)} [{m.user.first_name}](tg://user?id={m.user.id})\n"
-            if usernum == 7:
+            if usernum == 13:
                 await app.send_message(message.chat.id,f'{text}\n{usertxt}')
-                await asyncio.sleep(5)
+                await asyncio.sleep(4)
                 usernum = 0
                 usertxt = ""                          
         try :
@@ -70,10 +70,10 @@ async def tag_all_users(_,message):
 @Bot.on_message(filters.command("cancel") & filters.group & Admin)
 async def untag(client, message: Message):
     if not message.chat.id in SPAM_CHATS:
-        return await message.reply("<blockquote>**GAK ADA TAGALL TOLOL JANGAN GOBLOK LU.**</blockquote>")
+        return await message.reply("<blockquote>**APA SIH MEMEG ORANG GA ADA TAG ALL JANGAN KAYA ORANG TOLOL APA KONTOL.**</blockquote>")
     else:
         try:
             SPAM_CHATS.remove(message.chat.id)
         except:
             pass
-        return await message.reply("<blockquote>**UDAH BERHENTI YA ANJING..**</blockquote>")
+        return await message.reply("<blockquote>**UDAH BERHENTI ITU MAKANNYA LIAT PAKE MATA JANGAN PAKE MEMEG...**</blockquote>")
