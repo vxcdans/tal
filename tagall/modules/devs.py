@@ -1,6 +1,7 @@
 import sys
 import asyncio
 import subprocess
+import traceback
 from io import StringIO
 
 from tagall import Bot
