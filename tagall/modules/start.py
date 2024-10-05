@@ -94,14 +94,14 @@ async def start_msgmessag(app : Bot, message : Message):
     user = message.from_user.mention
     chat_type = message.chat.type
     if chat_type == CTYPE.PRIVATE:
-        msg = f"<blockquote>**Woy {user} Jelek!**\n\n**Gua Adalah {username} Bot Yang Di Rancang @Darenrorr Untuk Bisa Mention Member Di Group Lu.\n\nKalo Lu Mau Bot Kaya Gua Buat Aja Sendiri Orang Gua Di Rancang Khusus Buat Gc @differentnih Kok.**</blockquote>"
+        msg = f"<blockquote>**Woy {user} Jelek!**\n\n**Gua {username} Adalah Bot Yang Di Rancang @Darenrorr Untuk Bisa Mention Member Di Group Lu.\n\nKalo Lu Mau Bot Kaya Gua Buat Aja Sendiri Orang Gua Di Rancang Khusus Buat Gc @differentnih Kok.**</blockquote>"
         try:
             await message.reply(text=msg, reply_markup=inline)
         except FloodWait as e:
             await asyncio.sleep(e.value)
             await message.reply(text=msg, reply_markup=inline)
     elif chat_type in [CTYPE.GROUP, CTYPE.SUPERGROUP]:
-        msg = f"<blockquote>**Woy Goblok!**\n\n**Jaadiin Gua Admin Dulu Anjing Kalo Kagak Di Jadiin Admin Mana Bisa Mention Member Di Gruop Jelek Lo Ini😡, Kalo Gatau Cara Gunainnya Banyakin Amal Dulu Lu Kocak\n\nCreated by {OWNER_NAME}**</blockquote>"
+        msg = f"<blockquote>**Woy Kontol!**\n\n**Jadiin Gua Admin Dulu Pepek Kalo Kagak Di Jadiin Admin Mana Bisa Mention Member Di Group Jelek Ampas Sampah Lo Ini😡, Kalo Gatau Cara Makenya Banyakin Amal Sama Pahala Lu Dulu Tolol\n\nDeveloper {OWNER_NAME}**</blockquote>"
 
         try:
             await message.reply(text=msg, reply_markup=inlinegc)
