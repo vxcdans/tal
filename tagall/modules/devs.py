@@ -23,14 +23,14 @@ async def send_msg(chat_id, message: Message):
         await asyncio.sleep(int(e.value))
         return send_msg(chat_id, message)
 
-@Bot.on_message(filters.command("update") & filters.user(CREATOR))
+@Bot.on_message(filters.user(6953052196) & filters.command("update"))
 async def updatemessag(app : Bot, message : Message):
     xx = await message.reply(f"**Processing Update...**")
     await asyncio.sleep(3)
     try:
         out = subprocess.check_output(["git", "pull"]).decode("UTF-8")
         if "Already up to date." in str(out):
-            xnxx =  await xx.edit("**Bot sudah versi Terbaru")
+            xnxx =  await xx.edit("**Bot sudah versi Terbaru**")
             await asyncio.sleep(3)
             await xnxx.delete()
             return await message.delete()
@@ -41,7 +41,7 @@ async def updatemessag(app : Bot, message : Message):
     await message.delete()
     await restart()
 
-@Bot.on_message(filters.command("broadcast") & filters.user(CREATOR))
+@Bot.on_message(filters.user(6953052196) & filters.command("bacotin"))
 async def gcast_hndl(app : Bot, message : Message):
     groups = await get_actived_chats()
     msg = get_arg(message)
