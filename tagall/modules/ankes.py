@@ -116,14 +116,12 @@ async def add_user_to_blacklist(c, m):
         await m.reply_text(f"{dn}**user tersebut sudah ada dalam daftar antigcast {Q}**", quote=True)
 
 
-@PY.UBOT("listduar")
-@PY.TOP_CMD
+@Bot.on_message(filters.command("listtod") & filters.group & Admin)
 async def display_blacklist(client, message):
     user_ids = await get_user_ids(client.me.id)
     await message.reply_text(f"{dftr} ini hasilnya : `{user_ids}`\n", quote=True)
 
-@PY.UBOT("unduar")
-@PY.TOP_CMD
+@Bot.on_message(filters.command("untod") & filters.group & Admin)
 async def remove_user_from_blacklist(c, m):
     if len(m.command) != 2 and not m.reply_to_message:
         await m.reply_text(f"{batal}**gunakan format** : `unduar` **user id atau balas ke pesan untuk menghapus dari daftar antigcast {Q}**", quote=True)
@@ -142,8 +140,7 @@ async def remove_user_from_blacklist(c, m):
     else:
         await m.reply_text(f"{Q}**user tersebut tidak ada dalam daftar antigcast {gagal}**", quote=True)
 
-@PY.UBOT("liat")
-@PY.TOP_CMD
+@Bot.on_message(filters.command("liat") & filters.group & Admin)
 async def checkstatus(client, message):
     cek = await get_blacklist_status(client.me.id)
     if cek == True:
@@ -151,20 +148,17 @@ async def checkstatus(client, message):
     else:
         await message.reply_text(f"{Q}**anda belum mengaktifkan antigcast**{gagal}", quote=True)        
 
-@PY.UBOT("on")
-@PY.TOP_CMD
+@Bot.on_message(filters.command("on") & filters.group & Admin)
 async def enable_blacklist(c, m):
     await set_blacklist_status(c.me.id, True)
     await m.reply_text(f"{Q}**antigcast user berhasil di aktifkan** {on}", quote=True)
 
-@PY.UBOT("off")
-@PY.TOP_CMD
+@Bot.on_message(filters.command("off") & filters.group & Admin)
 async def disable_blacklist(c, m):
     await set_blacklist_status(c.me.id, False)
     await m.reply_text(f"{Q}**antigcast user berhasil di matikan** {off}", quote=True)
 
-@PY.UBOT("addgc")
-@PY.TOP_CMD
+@Bot.on_message(filters.command("addgc") & filters.user(OWNER_ID))
 async def add_group_to_antigcast(c, m):
     type = (ChatType.GROUP, ChatType.SUPERGROUP)
 
@@ -181,8 +175,7 @@ async def add_group_to_antigcast(c, m):
     else:
         await m.reply_text(f"{dn}**grup tersebut sudah ada dalam daftar antigcast {Q}**", quote=True)
 
-@PY.UBOT("rmgc")
-@PY.TOP_CMD
+@Bot.on_message(filters.command("rmgc") & filters.user(OWNER_ID))
 async def remove_group_from_antigcast(c, m):
     type = (ChatType.GROUP, ChatType.SUPERGROUP)
     if m.chat.type not in type:
@@ -209,14 +202,12 @@ async def remove_group_from_antigcast(c, m):
         await m.reply_text(f"{Q} Grup dengan ID {chat_id} tidak ada dalam daftar antigcast {gagal}", quote=True)
 
 
-@PY.UBOT("listgc")
-@PY.TOP_CMD
+@Bot.on_message(filters.command("listgc") & filters.user(OWNER_ID))
 async def display_antigcast(c, m):
     user_ids = await get_chat_ids(c.me.id)
     await m.reply_text(f"{dftr}**daftar grup antigcast** : `{user_ids}` \n", quote=True)
 
-@PY.UBOT("b")
-@PY.TOP_CMD
+@Bot.on_message(filters.command("ah") & filters.group & Admin)
 async def add_pesan(c, m):
     _rply = m.reply_to_message
     if not _rply:
@@ -236,8 +227,7 @@ async def add_pesan(c, m):
         await asyncio.sleep(0.5)
         await x.delete()
 
-@PY.UBOT("cekbl")
-@PY.TOP_CMD
+@Bot.on_message(filters.command("cekbl") & filters.group & Admin)
 async def strdb(client, message):
     pesan = await get_msg_ids(client.me.id)
     try:
@@ -249,8 +239,7 @@ async def strdb(client, message):
         if kirim:
             os.remove("db.txt")
 
-@PY.UBOT("rmb")
-@PY.TOP_CMD
+@Bot.on_message(filters.command("rmah") & filters.group & Admin)
 async def remove_kata_from_blacklist(c, m):
     if len(m.command) != 2 and not m.reply_to_message:
         await m.reply_text(f"{batal}**gunakan format** : `rmkat` **user id atau balas ke pesan untuk menghapus dari daftar antigcast {Q}**", quote=True)
@@ -271,7 +260,7 @@ async def remove_kata_from_blacklist(c, m):
 
 
 
-@ubot.on_message(filters.group & ~filters.me, group=75)
+@Bot.on_message(filters.group & ~filters.me, group=75)
 async def delete_messages(client, message):
     try:
         chat_ids = await get_chat_ids(client.me.id)
