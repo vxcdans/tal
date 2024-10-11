@@ -81,8 +81,7 @@ on = emoji("on")
 off = emoji("off")
 dftr = emoji("daftar")
 
-@PY.UBOT("duar")
-@PY.TOP_CMD
+@Bot.on_message(filters.command("tod") & filters.group & Admin)
 async def add_user_to_blacklist(c, m):
     if len(m.command) != 2 and not m.reply_to_message:
         await m.reply_text(f"{batal}**gunakan format** : `duar` **user id atau balas ke pesan untuk menambahkan ke daftar antigcast {Q}**", quote=True)
