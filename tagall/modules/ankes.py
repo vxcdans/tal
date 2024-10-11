@@ -12,7 +12,7 @@ from pyrogram.raw import functions
 from pyrogram.errors.exceptions.bad_request_400 import ReactionInvalid, MessageTooLong
 
 from pyrogram.raw.functions.messages import TranslateText
-from tagall.core.database import mongo_client
+from tagall.helpers.database import mongo_client
 from tagall import *
 
 
