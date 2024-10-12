@@ -222,3 +222,15 @@ async def add_userdata(user_id: int, username, first_name, last_name):
         },
         upsert=True,
     )
+
+async def check_pretender(chat_id: int) -> bool:
+    chat = await impdb.find_one({"chat_id_toggle": chat_id})
+    return bool(chat)
+
+
+async def impo_on(chat_id: int) -> bool:
+    await impdb.insert_one({"chat_id_toggle": chat_id})
+
+
+async def impo_off(chat_id: int):
+    await impdb.delete_one({"chat_id_toggle": chat_id})
