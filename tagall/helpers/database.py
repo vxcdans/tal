@@ -197,3 +197,28 @@ async def unmute_user(uid_id) -> bool:
     mutedusers.remove(uid_id)
     await globaldb.update_one({"muteduser": "muteduser"}, {"$set": {"mutedusers": mutedusers}}, upsert=True)
     return True
+
+#IMPOSTER
+
+async def usr_data(user_id: int) -> bool:
+    user = await impdb.find_one({"user_id": user_id})
+    return bool(user)
+
+
+async def get_userdata(user_id: int) -> bool:
+    user = await impdb.find_one({"user_id": user_id})
+    return user["username"], user["first_name"], user["last_name"]
+
+
+async def add_userdata(user_id: int, username, first_name, last_name):
+    await impdb.update_one(
+        {"user_id": user_id},
+        {
+            "$set": {
+                "username": username,
+                "first_name": first_name,
+                "last_name": last_name,
+            }
+        },
+        upsert=True,
+    )
