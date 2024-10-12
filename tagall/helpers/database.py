@@ -12,6 +12,7 @@ blackword = db['BLACKWORDS']
 owner = db['OWNERS']
 exp = db['EXP']
 globaldb = db['GLOBALMUTE']
+impdb = db['PRETENDER']
 
 
 #USERS
