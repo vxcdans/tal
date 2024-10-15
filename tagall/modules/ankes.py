@@ -279,9 +279,9 @@ async def delete_messages(client, message):
         else:
             for pattern in user_msg_patterns:
                 if bool(re.search(pattern, message.text)):
-                    await message.reply_text(f"<blockquote><b>{dn} <a href=tg://user?id={client.me.id}>{client.me.first_name} {client.me.last_name or ''}</a> Mampus Goblok Text Lu Masuk Ke Database</b></blockquote>")
-                    await asyncio.sleep(5)
-                    await message.delete()
+                    msg = await message.reply_text(f"<blockquote><b>{dn} <a href=tg://user?id={client.me.id}>{client.me.first_name} {client.me.last_name or ''}</a> Mampus Goblok Text Lu Masuk Ke Database</b></blockquote>")
+                    await asyncio.sleep(1)
+                    await msg.delete()
                     return await message.delete()
     except Exception:
         pass
