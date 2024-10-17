@@ -109,6 +109,9 @@ async def start_msgmessag(app : Bot, message : Message):
             await asyncio.sleep(e.value)
             await message.reply(text=msg, reply_markup=inlinegc)
 
+        try:
+           log = await app.send_message(LOGGER_ID, "{message.from_user.mention} Just Started Bot.\n\n<b>User Id :</b> <code>{message.from_user.id}")
+
 @Bot.on_callback_query(filters.regex(r"balik"))
 async def balik_cbq(client: Bot, query: CallbackQuery):
     try:
