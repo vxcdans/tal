@@ -91,7 +91,7 @@ def tolol():
 async def start_msgmessag(app : Bot, message : Message):
     bot = await app.get_me()
     username = bot.username
-    kontol = message.from.user_id
+    kontol = message.from_user.id
     user = message.from_user.mention
     log = await app.send_message(LOGGER_ID, "{user} Just Started Bot.\n\n<b>User Id :</b> <code>{kontol}")
     chat_type = message.chat.type
