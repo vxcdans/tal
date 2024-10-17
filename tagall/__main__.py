@@ -15,7 +15,6 @@ async def main():
         namebot = app.me.first_name
         log = await app.send_message(LOGGER_ID, "BOT AKTIF!")
         LOGGER("INFO").info(f"{namebot} | [ @{username} ] | 🔥 MENYALA MEMEK NYA! 🔥")
-        await log.delete()
     except Exception as a:
         print(a)
     LOGGER("INFO").info(f"[ BOT NYA UDAH IDUP YA ANJING JANGAN LUPA MAKASIH KE @Darensupport]")
