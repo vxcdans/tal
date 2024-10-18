@@ -111,6 +111,12 @@ async def start_msgmessag(app : Bot, message : Message):
             await asyncio.sleep(e.value)
             await message.reply(text=msg, reply_markup=inlinegc)
 
+        if await is_on_off(2):
+            return await app.send_message(
+                chat_id=config.LOGGER_ID,
+                text=f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}",
+            )
+
 @Bot.on_callback_query(filters.regex(r"balik"))
 async def balik_cbq(client: Bot, query: CallbackQuery):
     try:
