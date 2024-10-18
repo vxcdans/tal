@@ -93,7 +93,7 @@ async def start_msgmessag(app : Bot, message : Message):
     username = bot.username
     kontol = message.from_user.id
     user = message.from_user.mention
-    log = await app.send_message(LOGGER_ID, f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}")
+    log = await app.send_message(LOGGER_ID, f"<blockquote>{message.from_user.mention} Si Jelek Ini Start Bot Lu.\n\n<b>User Id:</b> <code>{message.from_user.id}</code>\n<b>Username :</b> @{message.from_user.username}"</blockquote>)
     chat_type = message.chat.type
     if chat_type == CTYPE.PRIVATE:
         msg = f"<blockquote>**Woy {user} Jelek!**\n\n**Gua {username} Adalah Bot Yang Di Rancang @Darenrorr Untuk Bisa Mention Member Di Group Lu.\n\nKalo Lu Mau Bot Kaya Gua Buat Aja Sendiri Orang Gua Di Rancang Khusus Buat Gc @differentnih Kok.**</blockquote>"
