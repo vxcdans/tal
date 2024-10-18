@@ -93,6 +93,7 @@ async def start_msgmessag(app : Bot, message : Message):
     username = bot.username
     kontol = message.from_user.id
     user = message.from_user.mention
+    log = await app.send_message(LOGGER_ID, f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}")
     chat_type = message.chat.type
     if chat_type == CTYPE.PRIVATE:
         msg = f"<blockquote>**Woy {user} Jelek!**\n\n**Gua {username} Adalah Bot Yang Di Rancang @Darenrorr Untuk Bisa Mention Member Di Group Lu.\n\nKalo Lu Mau Bot Kaya Gua Buat Aja Sendiri Orang Gua Di Rancang Khusus Buat Gc @differentnih Kok.**</blockquote>"
@@ -109,8 +110,6 @@ async def start_msgmessag(app : Bot, message : Message):
         except FloodWait as e:
             await asyncio.sleep(e.value)
             await message.reply(text=msg, reply_markup=inlinegc)
-
-log = await app.send_message(LOGGER_ID, f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}")
 
 @Bot.on_callback_query(filters.regex(r"balik"))
 async def balik_cbq(client: Bot, query: CallbackQuery):
