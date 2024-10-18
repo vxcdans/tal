@@ -93,7 +93,7 @@ async def start_msgmessag(app : Bot, message : Message):
     username = bot.username
     kontol = message.from_user.id
     user = message.from_user.mention
-    log = await app.send_message(LOGGER_ID, f"<blockquote><b>Wooyyyy {OWNER_NAME}\n{message.from_user.mention} Si Jelek Ini Start Bot Lu.\n\nUser Id: <code>{message.from_user.id}</code>\nUsername : @{message.from_user.username}</b></blockquote>")
+    log = await app.send_message(LOGGER_ID, f"<blockquote><b>Wooyyyy [Devs](tg://user?id={OWNER_ID})\n\nSi {message.from_user.mention} Jelek Ini Start Bot Lu.\n\nUser Id: <code>{message.from_user.id}</code>\nUsername : @{message.from_user.username}</b></blockquote>")
     chat_type = message.chat.type
     if chat_type == CTYPE.PRIVATE:
         msg = f"<blockquote>**Woy {user} Jelek!**\n\n**Gua {username} Adalah Bot Yang Di Rancang @Darenrorr Untuk Bisa Mention Member Di Group Lu.\n\nKalo Lu Mau Bot Kaya Gua Buat Aja Sendiri Orang Gua Di Rancang Khusus Buat Gc @differentnih Kok.**</blockquote>"
@@ -151,19 +151,25 @@ async def oner_cbq(client: Bot, query: CallbackQuery):
 @Bot.on_callback_query(filters.regex(r"botgua"))
 async def botgua_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(tolol())
-    text = """<blockquote>**List Bot Si Daren**</blockquote>
+    text = """<blockquote><b>List Bot Si Daren</b></blockquote>
 
-<blockquote>**Anti Gcast 
-@bukanantigcastbot**</blockquote>
+<blockquote><b>Anti Gcast 
+@bukanantigcastbot</b></blockquote>
 
-<blockquote>**Ai Chatbot 
-@jancokchatbot**</blockquote>
+<blockquote><b>Ai Chatbot 
+@jancokchatbot</b></blockquote>
 
-<blockquote>**String Session 
-@Dareenstringbot**</blockquote>
+<blockquote><b>String Session 
+@Dareenstringbot</b></blockquote>
 
-<blockquote>**Mention/Tagall 
-@Differenmentionbot**</blockquote>"""
+<blockquote><b>Mention/Tagall 
+@Differenmentionbot</b></blockquote>
+
+<blockquote><b>Userbot 1
+@Jancokkcelbot</b></blockquote>
+
+<blockquote><b>Userbot 2
+@Jancokkuserbot</b></blockquote>"""
     await query.edit_message_text(
         text = text,
         reply_markup = btn
