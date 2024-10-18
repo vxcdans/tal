@@ -11,7 +11,7 @@ from pyrogram.enums import MessageEntityType
 from tagall.helpers.database import *
 
 def restart():
-    os.execvp(sys.executable, [sys.executable, "-m tagall"])
+    os.execvp(sys.executable, [sys.executable, "python3 -m tagall"])
 
 def get_arg(message: Message):
     msg = message.text
