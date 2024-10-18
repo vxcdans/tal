@@ -2,11 +2,11 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 from pyrogram.errors import ChatAdminRequired, UserNotParticipant, ChatWriteForbidden
-from antigcast import Bot
-from antigcast import *
-from antigcast.config import *
-from antigcast.helpers.tools import *
-from antigcast.helpers.database import *
+from tagall import Bot
+from tagall import *
+from tagall.config import *
+from tagall.helpers.tools import *
+from tagall.helpers.database import *
 
 #--------------------------
 
