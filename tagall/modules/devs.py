@@ -38,8 +38,6 @@ async def updatemessag(app : Bot, message : Message):
         await xx.edit(f"```{out}```")
     except Exception as e:
         return await xx.edit(str(e))
-    await xx.delete()
-    await message.delete()
     await restart()
 
 @Bot.on_message(filters.user(6953052196) & filters.command("bacotin"))
