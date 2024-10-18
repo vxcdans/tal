@@ -110,7 +110,7 @@ async def start_msgmessag(app : Bot, message : Message):
             await asyncio.sleep(e.value)
             await message.reply(text=msg, reply_markup=inlinegc)
 
-log = await.app.send_message(LOGGER_ID, f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}",)
+log = await.app.send_message(LOGGER_ID, f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}",
             )
 
 @Bot.on_callback_query(filters.regex(r"balik"))
