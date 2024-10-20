@@ -25,11 +25,9 @@ async def chk_usr(app: Bot, message: Message):
         or lastname_before != message.from_user.last_name
     ):
         msg += f"""
-**🔓 Penyamar Terdeteksi 🔓**
-➖➖➖➖➖➖➖➖➖➖➖➖
-**🍊 Nama** : {message.from_user.mention}
-**🍅 User ID** : {message.from_user.id}
-➖➖➖➖➖➖➖➖➖➖➖➖\n
+**Penyamar Terdeteksi**
+**Nama** : {message.from_user.mention}
+**User ID** : {message.from_user.id}\n
 """
     if usernamebefore != message.from_user.username:
         usernamebefore = f"@{usernamebefore}" if usernamebefore else "TIDAK ADA USERNAME"
@@ -39,11 +37,9 @@ async def chk_usr(app: Bot, message: Message):
             else "TIDAK ADA USERNAME"
         )
         msg += """
-**🐻‍❄️ Mengganti Username 🐻‍❄️**
-➖➖➖➖➖➖➖➖➖➖➖➖
-**🎭 Dari** : {bef}
-**🍜 Ke** : {aft}
-➖➖➖➖➖➖➖➖➖➖➖➖\n
+**Mengganti Username**
+**Dari** : {bef}
+**Ke** : {aft}\n
 """.format(bef=usernamebefore, aft=usernameafter)
         await add_userdata(
             message.from_user.id,
@@ -53,11 +49,9 @@ async def chk_usr(app: Bot, message: Message):
         )
     if first_name != message.from_user.first_name:
         msg += """
-**🪧 Mengganti Nama Depan 🪧**
-➖➖➖➖➖➖➖➖➖➖➖➖
-**🔐 Dari** : {bef}
-**🍓 Ke** : {aft}
-➖➖➖➖➖➖➖➖➖➖➖➖\n
+**Mengganti Nama Depan**
+**Dari** : {bef}
+**Ke** : {aft}\n
 """.format(
             bef=first_name, aft=message.from_user.first_name
         )
@@ -71,11 +65,9 @@ async def chk_usr(app: Bot, message: Message):
         lastname_before = lastname_before or "TIDAK ADA NAMA BELAKANG"
         lastname_after = message.from_user.last_name or "TIDAK ADA NAMA BELAKANG"
         msg += """
-**🪧 Mengganti Nama Belakang 🪧**
-➖➖➖➖➖➖➖➖➖➖➖➖
-**🚏 Dari** : {bef}
-**🍕 Ke** : {aft}
-➖➖➖➖➖➖➖➖➖➖➖➖\n
+**Mengganti Nama Belakang**
+**Dari** : {bef}
+**Ke** : {aft}\n
 """.format(
             bef=lastname_before, aft=lastname_after
         )
