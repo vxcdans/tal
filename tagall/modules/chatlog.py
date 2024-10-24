@@ -30,6 +30,3 @@ async def join_watcher(_, message):
                 await Bot.send_photo(LOG_GROUP_ID, photo=random.choice(photo), caption=msg, reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton(f"Add Me!", url=f"tg://openmessage?user_id={message.from_user.id}")]
              ]))
-                await userbot.join_chat(f"{username}")
-    except Exception as e:
-        print(f"Error: {e}")
