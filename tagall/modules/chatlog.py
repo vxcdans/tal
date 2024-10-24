@@ -25,4 +25,4 @@ async def join_watcher(_, message):
                 )
                 await app.send_photo(LOGGER_ID, photo=random.choice(DAREN), caption=msg, reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton(f"Add Me!", url=f"tg://openmessage?user_id={message.from_user.id}")]
-             ])
+]))
