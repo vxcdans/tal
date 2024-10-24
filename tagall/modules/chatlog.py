@@ -20,12 +20,7 @@ async def join_watcher(_, message):
                 count = await app.get_chat_members_count(chat.id)
                 username = message.chat.username if message.chat.username else "Private Group"
                 msg = (
-                    f"**📝ᴍᴜsɪᴄ ʙᴏᴛ ᴀᴅᴅ ᴏɴ #ɴᴇᴡ_ɢʀᴏᴜᴘ**\n\n"
-                    f"**📌Chat Name:** {message.chat.title}\n"
-                    f"**🍂Chat ID:** {message.chat.id}\n"
-                    f"**🔐Chat Username:** @{username}\n"
-                    f"**📈Group Members:** {count}\n"
-                    f"**🤔DiTambahkan Oleh:** {message.from_user.mention}"
+                    f"<blockquote>**Bejir Ada #New_Group**\n\n**Chat Name:** {message.chat.title}\n**Chat ID:** {message.chat.id}\n**Chat Username:** @{username}\n**Group Members:** {count}\n**DiTambahkan Oleh:** {message.from_user.mention}</blockquote>"
                 )
                 await Bot.send_photo(LOG_GROUP_ID, photo=random.choice(photo), caption=msg, reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton(f"Add Me!", url=f"tg://openmessage?user_id={message.from_user.id}")]
