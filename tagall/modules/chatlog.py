@@ -11,10 +11,9 @@ DAREN = [
 ]
 
 
-@app.on_message(filters.new_chat_members, group=2)
+@Bot.on_message(filters.new_chat_members, group=2)
 async def join_watcher(_, message):    
     try:
-        userbot = await get_assistant(message.chat.id)
         chat = message.chat
         for members in message.new_chat_members:
             if members.id == app.id:
@@ -28,7 +27,7 @@ async def join_watcher(_, message):
                     f"**📈Group Members:** {count}\n"
                     f"**🤔DiTambahkan Oleh:** {message.from_user.mention}"
                 )
-                await app.send_photo(LOG_GROUP_ID, photo=random.choice(photo), caption=msg, reply_markup=InlineKeyboardMarkup([
+                await Bot.send_photo(LOG_GROUP_ID, photo=random.choice(photo), caption=msg, reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton(f"Add Me!", url=f"tg://openmessage?user_id={message.from_user.id}")]
              ]))
                 await userbot.join_chat(f"{username}")
