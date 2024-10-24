@@ -7,27 +7,30 @@ from tagall import Bot
 
 
 DAREN = [
-"https://graph.org/file/f76fd86d1936d45a63c64.jpg"
+"https://graph.org/file/a8f472db59ffc2fa1a10c.jpg"
 ]
 
-@Bot.on_message(filters.new_chat_members, group=2)
+
+@app.on_message(filters.new_chat_members, group=2)
 async def join_watcher(_, message):    
-    chat = message.chat
-    link = await Bot.export_chat_invite_link(message.chat.id)
-    for members in message.new_chat_members:
-        if members.id == app.id:
-            count = await Bot.get_chat_members_count(chat.id)
-
-            msg = (
-                f"❀ ʙᴏᴛ ᴀᴅᴅᴇᴅ ɪɴ ᴀ #ɴᴇᴡ_ɢʀᴏᴜᴘ ❀\n\n"
-
-                f"๏ ɢʀᴏᴜᴘ ɴᴀᴍᴇ ➠ {message.chat.title}\n"
-                f"๏ ɢʀᴏᴜᴘ ɪᴅ ➠ {message.chat.id}\n"
-                f"๏ ɢʀᴏᴜᴘ ᴜsᴇʀɴᴀᴍᴇ ➠ @{message.chat.username}\n"
-                f"๏ ɢʀᴏᴜᴘ ʟɪɴᴋ ➠[ʙᴀʙʏ ᴛᴏᴜᴄʜ]({link})\n"
-                f"๏ ɢʀᴏᴜᴘ ᴍᴇᴍʙᴇʀs ➠ {count}\n\n"
-                f"๏ ᴀᴅᴅᴇᴅ ʙʏ ➠ {message.from_user.mention}"
-            )
-            await Bot.send_photo(LOG_GROUP_ID, photo=random.choice(DAREN), caption=msg, reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton(f"sᴇᴇ ʙᴏᴛ ᴀᴅᴅᴇᴅ ɢʀᴏᴜᴘ", url=f"{link}")]
-         ]))
+    try:
+        userbot = await get_assistant(message.chat.id)
+        chat = message.chat
+        for members in message.new_chat_members:
+            if members.id == app.id:
+                count = await app.get_chat_members_count(chat.id)
+                username = message.chat.username if message.chat.username else "Private Group"
+                msg = (
+                    f"**📝ᴍᴜsɪᴄ ʙᴏᴛ ᴀᴅᴅ ᴏɴ #ɴᴇᴡ_ɢʀᴏᴜᴘ**\n\n"
+                    f"**📌Chat Name:** {message.chat.title}\n"
+                    f"**🍂Chat ID:** {message.chat.id}\n"
+                    f"**🔐Chat Username:** @{username}\n"
+                    f"**📈Group Members:** {count}\n"
+                    f"**🤔DiTambahkan Oleh:** {message.from_user.mention}"
+                )
+                await app.send_photo(LOG_GROUP_ID, photo=random.choice(photo), caption=msg, reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton(f"Add Me!", url=f"tg://openmessage?user_id={message.from_user.id}")]
+             ]))
+                await userbot.join_chat(f"{username}")
+    except Exception as e:
+        print(f"Error: {e}")
