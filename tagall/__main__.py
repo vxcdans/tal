@@ -15,7 +15,7 @@ async def main():
         app.me = await app.get_me()
         username = app.me.username
         namebot = app.me.first_name
-        log = await app.send_message(LOGGER_ID, "<blockquote><b>UDAH NYALA GUA JINK</b></blockquote>")
+        log = await app.send_message(LOGGER_ID, "<blockquote><b>{bot.me.mention} Berhasil Di Aktifkan\nPython : {python_version()}\nPyrogram : {version}</b></blockquote>")
         LOGGER("INFO").info(f"{namebot} | [ @{username} ] | 🔥 MENYALA MEMEK NYA! 🔥")
     except Exception as a:
         print(a)
