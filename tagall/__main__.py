@@ -1,4 +1,6 @@
 import asyncio
+from platform import python_version
+from pyrogram import __version__
 from tagall import Bot, app
 from tagall.config import LOGGER, LOGGER_ID
 from pyrogram import idle
