@@ -16,7 +16,7 @@ from tagall.helpers.database import *
 
 STATUS = enums.ChatMemberStatus
 SPAM_CHATS = []
-emoji = "🏮".split(
+emoji = "❥".split(
     " "
 )
 
@@ -26,7 +26,7 @@ Admin = filters.create(isAdmin)
 async def tag_all_users(_,message): 
     replied = message.reply_to_message  
     if len(message.command) < 2 and not replied:
-        await message.reply_text("<blockquote>**Mana kata kata yang mau di tagallin anj**</blockquote>") 
+        await message.reply_text("Kasih text nya dong seng😡") 
         return                  
     if replied:
         SPAM_CHATS.append(message.chat.id)      
@@ -57,7 +57,7 @@ async def tag_all_users(_,message):
                 break 
             usernum += 1
             usertxt += f"{random.choice(emoji)} [{m.user.first_name}](tg://user?id={m.user.id})\n"
-            if usernum == 6:
+            if usernum == 5:
                 await app.send_message(message.chat.id,f'{text}\n{usertxt}')
                 await asyncio.sleep(4)
                 usernum = 0
@@ -70,10 +70,10 @@ async def tag_all_users(_,message):
 @Bot.on_message(filters.command("cancel") & filters.group & Admin)
 async def untag(client, message: Message):
     if not message.chat.id in SPAM_CHATS:
-        return await message.reply("<blockquote>**Gada proses tagallan yang jalan anj.**</blockquote>")
+        return await message.reply("ngga ada proses tagallan seng☺︎")
     else:
         try:
             SPAM_CHATS.remove(message.chat.id)
         except:
             pass
-        return await message.reply("<blockquote>**Proses tagall berhenti jing..**</blockquote>")
+        return await message.reply("Proses tagall berhenti seng😋")
