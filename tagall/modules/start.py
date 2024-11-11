@@ -146,7 +146,7 @@ kalo mau liat bot lain tuh dibawah klik aja.
 @Bot.on_callback_query(filters.regex(r"oner"))
 async def oner_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(memek())
-    text = """WOY ANJING BUTTON DI BAWAH ITU BUAT TAU SIAPA YANG BUAT BOT INI YA KONTOL.\nMINIMAL TERIMA KASIH JUGA KEG TOLOL KARNA UDAH DI BUATIN BOT KEREN KAYAA GUAA ANJAAYYY"""
+    text = """Tuh cek aja siapa yang buat.\nBilang makasih dulu napa jangan main kabur aja"""
     await query.edit_message_text(
         text = text,
         reply_markup = btn
