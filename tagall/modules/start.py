@@ -132,6 +132,10 @@ async def help_cbq(client: Bot, query: CallbackQuery):
 /tag : untuk mention member beb
 
 /cancel : untuk membatal mention nya beb
+
+cuma modul tagall doang kok,
+gada yang spesial di bot ini,
+kan yang spesial itu kamu hehe🥰
 """
     await query.edit_message_text(
         text = text,
