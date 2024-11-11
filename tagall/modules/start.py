@@ -17,8 +17,8 @@ CTYPE = enums.ChatType
 inlinegc = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton(text="Owner", url="https://t.me/Darenrorr"),
-            InlineKeyboardButton(text="Channel", url="https://t.me/cehadaren")
+            InlineKeyboardButton(text="👨‍💻 Owner", url="https://t.me/viinotpii"),
+            InlineKeyboardButton(text="🛒 Store", url="https://t.me/vstreid")
         ]
     ]
 )
@@ -26,12 +26,12 @@ inlinegc = InlineKeyboardMarkup(
 inline = InlineKeyboardMarkup(
     [
         [
-                    InlineKeyboardButton(text="Support", url="https://t.me/darensupport"),
-                    InlineKeyboardButton(text="Channel", url="https://t.me/cehadaren")
+                    InlineKeyboardButton(text="🗳 Support", url="https://t.me/viicombot"),
+                    InlineKeyboardButton(text="🛒 Store", url="https://t.me/vstreid")
         ],
         [
-                    InlineKeyboardButton(text="Owner", callback_data = "oner"),
-                    InlineKeyboardButton(text="Menu Bantuan", callback_data = "help")
+                    InlineKeyboardButton(text="👨‍💻 Owner", callback_data = "oner"),
+                    InlineKeyboardButton(text="📂 Menu Bantuan", callback_data = "help")
         ],
     ]
 )
@@ -40,7 +40,7 @@ def add_panel(username):
     button = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton(text="Tambahkan Ke Group", url=f"http://t.me/{username}?startgroup=appstart")
+                InlineKeyboardButton(text="💎 Tambahkan Ke Group", url=f"http://t.me/{username}?startgroup=appstart")
             ]
         ]
     )
@@ -50,7 +50,7 @@ def add_panel(username):
 def admin_panel():
     buttons = [
         [
-            InlineKeyboardButton(text="Owner", url=f"http://t.me/Darenrorr")
+            InlineKeyboardButton(text="👨‍💻 Owner", url=f"http://t.me/viinotpii")
         ],
     ]
 
@@ -59,8 +59,8 @@ def admin_panel():
 def anjing():
     buttons = [
         [
-            InlineKeyboardButton(text="List Bot", callback_data=f"botgua"),
-            InlineKeyboardButton(text="Tutup",callback_data=f"balik")
+            InlineKeyboardButton(text="📋 List Bot", callback_data=f"botgua"),
+            InlineKeyboardButton(text="❌ Tutup",callback_data=f"balik")
         ],
     ]
 
@@ -69,10 +69,10 @@ def anjing():
 def memek():
     buttons = [
         [
-            InlineKeyboardButton(text="Tutup", callback_data=f"balik")
+            InlineKeyboardButton(text="❌ Tutup", callback_data=f"balik")
         ],
         [
-            InlineKeyboardButton(text="Developer", url=f"http://t.me/Darenrorr")
+            InlineKeyboardButton(text="👨‍💻 Developer", url=f"http://t.me/viinotpii")
         ],
     ]
 
@@ -81,7 +81,7 @@ def memek():
 def tolol():
     buttons = [
         [
-            InlineKeyboardButton(text="Tutup",callback_data=f"balik")
+            InlineKeyboardButton(text="❌ Tutup",callback_data=f"balik")
         ],
     ]
 
@@ -93,17 +93,17 @@ async def start_msgmessag(app : Bot, message : Message):
     username = bot.username
     kontol = message.from_user.id
     user = message.from_user.mention
-    log = await app.send_message(LOGGER_ID, f"<blockquote><b>Wooyyyy [Devs](tg://openmessage?user_id=6953052196)\n\nSi {message.from_user.mention} Jelek Ini Start Bot Lu.\n\nUser Id: <code>{message.from_user.id}</code>\nUsername : @{message.from_user.username}</b></blockquote>")
+    log = await app.send_message(LOGGER_ID, f"<blockquote><b>Wooyyyy [Mek](tg://openmessage?user_id=728409811)\n\nSi {message.from_user.mention} Jelek Ini Start Bot Lu.\n\nUser Id: <code>{message.from_user.id}</code>\nUsername : @{message.from_user.username}</b></blockquote>")
     chat_type = message.chat.type
     if chat_type == CTYPE.PRIVATE:
-        msg = f"<blockquote>**Woy {user} Jelek!**\n\n**Gua {username} Adalah Bot Yang Di Rancang @Darenrorr Untuk Bisa Mention Member Di Group Lu.\n\nKalo Lu Mau Bot Kaya Gua Buat Aja Sendiri Orang Gua Di Rancang Khusus Buat Gc @differentnih Kok.**</blockquote>"
+        msg = f"<blockquote>**Woy {user} Jelek!**\n\n**Gua {username} Adalah Bot Yang Di Rancang @viinotpii Untuk Bisa Mention Member Di Group Lu.\n\nKalo Lu Mau Bot Kaya Gua Buat Aja Sendiri Orang Gua Di Rancang Khusus Buat Pengguna Gratisan Kaya Elu.**</blockquote>"
         try:
             await message.reply(text=msg, reply_markup=inline)
         except FloodWait as e:
             await asyncio.sleep(e.value)
             await message.reply(text=msg, reply_markup=inline)
     elif chat_type in [CTYPE.GROUP, CTYPE.SUPERGROUP]:
-        msg = f"<blockquote>**Woy Kontol!**\n\n**Jadiin Gua Admin Dulu Pepek Kalo Kagak Di Jadiin Admin Mana Bisa Mention Member Di Group Jelek Ampas Sampah Lo Ini😡, Kalo Gatau Cara Makenya Banyakin Amal Sama Pahala Lu Dulu Tolol\n\nDeveloper {OWNER_NAME}**</blockquote>"
+        msg = f"<blockquote>**Woy Kontol!**\n\n**Jadiin Gua Admin Dulu Pepek Kalo Kagak Di Jadiin Admin Mana Bisa Mention Member Di Group Jelek Ampas Sampah Lo Ini😡, Kalo Gatau Cara Makenya Banyakin Amal Sama Pahala Lu Dulu Tolol\n\nOwner {OWNER_NAME}**</blockquote>"
 
         try:
             await message.reply(text=msg, reply_markup=inlinegc)
@@ -151,25 +151,25 @@ async def oner_cbq(client: Bot, query: CallbackQuery):
 @Bot.on_callback_query(filters.regex(r"botgua"))
 async def botgua_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(tolol())
-    text = """<blockquote><b>List Bot Si Daren</b></blockquote>
+    text = """<blockquote><b>List Bot Vii</b></blockquote>
 
 <blockquote><b>Anti Gcast 
-@bukanantigcastbot</b></blockquote>
+@AntiBc2Bot</b></blockquote>
 
-<blockquote><b>Ai Chatbot 
-@jancokchatbot</b></blockquote>
+<blockquote><b>Chatbot 
+@ViiChtBot</b></blockquote>
 
-<blockquote><b>String Session 
-@Dareenstringbot</b></blockquote>
+<blockquote><b>Music Manage Bot 
+@ViiMusicBot</b></blockquote>
 
 <blockquote><b>Mention/Tagall 
-@Differenmentionbot</b></blockquote>
+@viimentionbot</b></blockquote>
 
 <blockquote><b>Userbot 1
-@Jancokkcelbot</b></blockquote>
+@VT_Ubot</b></blockquote>
 
 <blockquote><b>Userbot 2
-@Jancokkuserbot</b></blockquote>"""
+@V1ViiUbot</b></blockquote>"""
     await query.edit_message_text(
         text = text,
         reply_markup = btn
