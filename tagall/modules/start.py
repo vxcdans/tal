@@ -103,7 +103,7 @@ async def start_msgmessag(app : Bot, message : Message):
             await asyncio.sleep(e.value)
             await message.reply(text=msg, reply_markup=inline)
     elif chat_type in [CTYPE.GROUP, CTYPE.SUPERGROUP]:
-        msg = f"<blockquote>**Woy Kontol!**\n\n**Jadiin Gua Admin Dulu Pepek Kalo Kagak Di Jadiin Admin Mana Bisa Mention Member Di Group Jelek Ampas Sampah Lo Ini😡, Kalo Gatau Cara Makenya Banyakin Amal Sama Pahala Lu Dulu Tolol\n\nOwner {OWNER_NAME}**</blockquote>"
+        msg = f"ihhh 😡\n\njadiin aku admin dulu beb kalo ngga dijadiin admin mana bisa mention di grup kamu ih, kalo kamu gatau cara make pc aja pacar aku {OWNER_NAME}"
 
         try:
             await message.reply(text=msg, reply_markup=inlinegc)
@@ -115,25 +115,25 @@ async def start_msgmessag(app : Bot, message : Message):
 async def balik_cbq(client: Bot, query: CallbackQuery):
     try:
         await query.message.reply_to_message.delete()
-        await client.send_message(query.from_user.id, "<blockquote>**ANAK ANJING MALAH CABUT**</blockquote>")
+        await client.send_message(query.from_user.id, "Ih kamu kemana beb")
     except:
         pass
     try:
         await query.message.delete()
-        await client.send_message(query.from_user.id, "<blockquote>**ANAK ANJING MALAH CABUT**</blockquote>")
+        await client.send_message(query.from_user.id, "Dih malah pergi")
     except:
         pass
 
 @Bot.on_callback_query(filters.regex(r"help"))
 async def help_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(anjing())
-    text = """<blockquote>**Menu Bantuan Bot Tagall Ini**</blockquote>
+    text = """**Menu Bantuan Bot Tagall Ini**
 
-<blockquote>/tag : **UNTUK MENTION MEMBER LA GOBLOK**
+/tag : untuk memtion member beb
 
-/cancel : **ORANG BEGO JUGA TAU KEGUNAANNYA BUAT STOP MENTION**</blockquote>
+/cancel : untuk membatal mention nya beb
 
-<blockquote>**Kepo Amat Lu Kontol Liat Liat Menu Bantuan Gua, Gua Bukan Bot Spesial Kaya Nasi Goreng Yang Banyak Fitur Nya Gua Cuma Bot Tag All Doang Tolol**😡!!</blockquote>"""
+**Kepo Amat Lu Kontol Liat Liat Menu Bantuan Gua, Gua Bukan Bot Spesial Kaya Nasi Goreng Yang Banyak Fitur Nya Gua Cuma Bot Tag All Doang Tolol**😡!!"""
     await query.edit_message_text(
         text = text,
         reply_markup = btn
