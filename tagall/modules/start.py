@@ -96,14 +96,14 @@ async def start_msgmessag(app : Bot, message : Message):
     log = await app.send_message(LOGGER_ID, f"Liat [sayang](tg://openmessage?user_id=728409811)\n\nSi {message.from_user.mention} Start bot kamu.\n\nUser Id: <code>{message.from_user.id}</code>\nUsername : @{message.from_user.username}")
     chat_type = message.chat.type
     if chat_type == CTYPE.PRIVATE:
-        msg = f"Hai {user}!**\n\n**aku {username} adalah bot yang dibikin sama cowo aku @viinotpii untuk bisa mention di grup kamu.\n\nselamat mencoba beb {user}!"
+        msg = f"Hai {user}!**\n\n**Aku @{username} adalah bot yang dibikin @viinotpii untuk bisa melakukan mention di grup kamu.\n\nSelamat mencoba beb {user}!"
         try:
             await message.reply(text=msg, reply_markup=inline)
         except FloodWait as e:
             await asyncio.sleep(e.value)
             await message.reply(text=msg, reply_markup=inline)
     elif chat_type in [CTYPE.GROUP, CTYPE.SUPERGROUP]:
-        msg = f"ihhh 😡\n\njadiin aku admin dulu beb kalo ngga dijadiin admin mana bisa mention di grup kamu ih, kalo kamu gatau cara make pc aja pacar aku {OWNER_NAME}"
+        msg = f"ihhh ga gitu tau 😡\n\njadiin aku admin dulu beb,kalo ngga dijadiin admin mana bisa mention di grup kamu nah,kalo kamu gatau cara make pc aja {OWNER_NAME}"
 
         try:
             await message.reply(text=msg, reply_markup=inlinegc)
@@ -127,7 +127,7 @@ async def balik_cbq(client: Bot, query: CallbackQuery):
 @Bot.on_callback_query(filters.regex(r"help"))
 async def help_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(anjing())
-    text = """**Menu Bantuan Bot Tagall Ini**
+    text = """**Menu bantuan bot tagall**
 
 /tag : untuk mention member beb
 
@@ -152,23 +152,23 @@ async def botgua_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(tolol())
     text = """<blockquote><b>List Bot Vii</b></blockquote>
 
-<blockquote><b>Anti Gcast 
-@AntiBc2Bot</b></blockquote>
+Anti Gcast 
+@AntiBc2Bot
 
-<blockquote><b>Chatbot 
-@ViiChtBot</b></blockquote>
+Chatbot 
+@ViiChtBot
 
-<blockquote><b>Music Manage Bot 
-@ViiMusicBot</b></blockquote>
+Music Manage Bot 
+@ViiMusicBot
 
-<blockquote><b>Mention/Tagall 
-@VMentionBot</b></blockquote>
+Mention/Tagall 
+@VMentionBot
 
-<blockquote><b>Userbot 1
-@VT_Ubot</b></blockquote>
+Userbot 1
+@VT_Ubot
 
-<blockquote><b>Userbot 2
-@V1ViiUbot</b></blockquote>"""
+Userbot 2
+@V1ViiUbot"""
     await query.edit_message_text(
         text = text,
         reply_markup = btn
