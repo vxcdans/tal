@@ -26,7 +26,7 @@ Admin = filters.create(isAdmin)
 async def tag_all_users(_,message): 
     replied = message.reply_to_message  
     if len(message.command) < 2 and not replied:
-        await message.reply_text("<blockquote>**KASIH GUA KATA KATA YANG MAU DI TAG ALL ANJENG**</blockquote>") 
+        await message.reply_text("<blockquote>**Mana kata kata yang mau di tagallin anj**</blockquote>") 
         return                  
     if replied:
         SPAM_CHATS.append(message.chat.id)      
@@ -70,10 +70,10 @@ async def tag_all_users(_,message):
 @Bot.on_message(filters.command("cancel") & filters.group & Admin)
 async def untag(client, message: Message):
     if not message.chat.id in SPAM_CHATS:
-        return await message.reply("<blockquote>**APA SIH MEMEG ORANG GA ADA TAG ALL JANGAN KAYA ORANG TOLOL APA KONTOL.**</blockquote>")
+        return await message.reply("<blockquote>**Gada proses tagallan yang jalan anj.**</blockquote>")
     else:
         try:
             SPAM_CHATS.remove(message.chat.id)
         except:
             pass
-        return await message.reply("<blockquote>**UDAH BERHENTI ITU MAKANNYA LIAT PAKE MATA JANGAN PAKE MEMEG...**</blockquote>")
+        return await message.reply("<blockquote>**Proses tagall berhenti jing..**</blockquote>")
