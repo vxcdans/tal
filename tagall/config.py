@@ -16,8 +16,8 @@ BROADCAST_AS_COPY = True
 
 PLUG = dict(root="tagall/plugins")
 
-OWNER_ID = [int(x) for x in (os.environ.get("OWNER_ID", "6953052196").split())]
-OWNER_NAME = os.environ.get("OWNER_NAME", "@Darenrorr")
+OWNER_ID = [int(x) for x in (os.environ.get("OWNER_ID", "728409811").split())]
+OWNER_NAME = os.environ.get("OWNER_NAME", "@viinotpii")
 
 
 LOG_FILE_NAME = "tagall_logs.txt"
@@ -35,5 +35,5 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 def LOGGER(name: str) -> logging.Logger:
     return logging.getLogger(name)
 
-CREATOR = [ 7043537972
+CREATOR = [ 728409811
 ]
