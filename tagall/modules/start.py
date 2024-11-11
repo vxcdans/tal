@@ -136,6 +136,7 @@ async def help_cbq(client: Bot, query: CallbackQuery):
 cuma modul tagall doang kok,
 gada yang spesial di bot ini,
 kan yang spesial itu kamu hehe🥰
+kalo mau liat bot lain tuh dibawah klik aja.
 """
     await query.edit_message_text(
         text = text,
@@ -145,7 +146,7 @@ kan yang spesial itu kamu hehe🥰
 @Bot.on_callback_query(filters.regex(r"oner"))
 async def oner_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(memek())
-    text = """<blockquote>**WOY ANJING BUTTON DI BAWAH ITU BUAT TAU SIAPA YANG BUAT BOT INI YA KONTOL.\nMINIMAL TERIMA KASIH JUGA KEG TOLOL KARNA UDAH DI BUATIN BOT KEREN KAYAA GUAA ANJAAYYY**</blockquote>"""
+    text = """WOY ANJING BUTTON DI BAWAH ITU BUAT TAU SIAPA YANG BUAT BOT INI YA KONTOL.\nMINIMAL TERIMA KASIH JUGA KEG TOLOL KARNA UDAH DI BUATIN BOT KEREN KAYAA GUAA ANJAAYYY"""
     await query.edit_message_text(
         text = text,
         reply_markup = btn
