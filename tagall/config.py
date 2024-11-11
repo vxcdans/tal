@@ -20,7 +20,7 @@ OWNER_ID = [int(x) for x in (os.environ.get("OWNER_ID", "6953052196").split())]
 OWNER_NAME = os.environ.get("OWNER_NAME", "@Darenrorr")
 
 
-LOG_FILE_NAME = "antigcast_logs.txt"
+LOG_FILE_NAME = "tagall_logs.txt"
 logging.basicConfig(
     level=logging.INFO,
     format="[%(levelname)s] - %(name)s - %(message)s",
