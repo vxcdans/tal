@@ -93,10 +93,10 @@ async def start_msgmessag(app : Bot, message : Message):
     username = bot.username
     kontol = message.from_user.id
     user = message.from_user.mention
-    log = await app.send_message(LOGGER_ID, f"<blockquote><b>Wooyyyy [Mek](tg://openmessage?user_id=728409811)\n\nSi {message.from_user.mention} Jelek Ini Start Bot Lu.\n\nUser Id: <code>{message.from_user.id}</code>\nUsername : @{message.from_user.username}</b></blockquote>")
+    log = await app.send_message(LOGGER_ID, f"Liat [sayang](tg://openmessage?user_id=728409811)\n\nSi {message.from_user.mention} Start bot kamu.\n\nUser Id: <code>{message.from_user.id}</code>\nUsername : @{message.from_user.username}")
     chat_type = message.chat.type
     if chat_type == CTYPE.PRIVATE:
-        msg = f"<blockquote>**Woy {user} Jelek!**\n\n**Gua {username} Adalah Bot Yang Di Rancang @viinotpii Untuk Bisa Mention Member Di Group Lu.\n\nKalo Lu Mau Bot Kaya Gua Buat Aja Sendiri Orang Gua Di Rancang Khusus Buat Pengguna Gratisan Kaya Elu.**</blockquote>"
+        msg = f"Hai {user}!**\n\n**aku {username} adalah bot yang dibikin sama cowo aku @viinotpii untuk bisa mention di grup kamu.\n\nselamat mencoba beb {user}!"
         try:
             await message.reply(text=msg, reply_markup=inline)
         except FloodWait as e:
