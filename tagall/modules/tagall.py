@@ -56,9 +56,9 @@ async def tag_all_users(_,message):
             if message.chat.id not in SPAM_CHATS:
                 break 
             usernum += 1
-            usertxt += f"{random.choice(emoji)} [{m.user.first_name}](tg://user?id={m.user.id})\n\n🛒 @vstreid"
+            usertxt += f"{random.choice(emoji)} [{m.user.first_name}](tg://user?id={m.user.id})\n"
             if usernum == 5:
-                await app.send_message(message.chat.id,f'{text}\n{usertxt}')
+                await app.send_message(message.chat.id,f'{text}\n{usertxt}\n\n🛒@vstreid')
                 await asyncio.sleep(4)
                 usernum = 0
                 usertxt = ""                          
