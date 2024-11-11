@@ -7,4 +7,5 @@ python-dateutil
 schedule
 requests
 Pyromod==1.5
-git+https://github.com/naya1503/mypyrogram@dev
+#git+https://github.com/naya1503/mypyrogram@dev
+git+https://github.com/TelegramPlayGround/pyrogram-tgcrypto
