@@ -163,7 +163,7 @@ async def botgua_cbq(client: Bot, query: CallbackQuery):
 @ViiMusicBot</b></blockquote>
 
 <blockquote><b>Mention/Tagall 
-@viimentionbot</b></blockquote>
+@VMentionBot</b></blockquote>
 
 <blockquote><b>Userbot 1
 @VT_Ubot</b></blockquote>
