@@ -129,11 +129,10 @@ async def help_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(anjing())
     text = """**Menu Bantuan Bot Tagall Ini**
 
-/tag : untuk memtion member beb
+/tag : untuk mention member beb
 
 /cancel : untuk membatal mention nya beb
-
-**Kepo Amat Lu Kontol Liat Liat Menu Bantuan Gua, Gua Bukan Bot Spesial Kaya Nasi Goreng Yang Banyak Fitur Nya Gua Cuma Bot Tag All Doang Tolol**😡!!"""
+"""
     await query.edit_message_text(
         text = text,
         reply_markup = btn
