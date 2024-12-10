@@ -16,7 +16,7 @@ from tagall.helpers.database import *
 
 STATUS = enums.ChatMemberStatus
 SPAM_CHATS = []
-emoji = "❥".split(
+emoji = "💌".split(
     " "
 )
 
@@ -26,7 +26,7 @@ Admin = filters.create(isAdmin)
 async def tag_all_users(_,message): 
     replied = message.reply_to_message  
     if len(message.command) < 2 and not replied:
-        await message.reply_text("❏ Kasih text nya dong seng😡") 
+        await message.reply_text("𝘒𝘢𝘴𝘪𝘩 𝘵𝘦𝘹𝘵 𝘯𝘺𝘢 𝘥𝘰𝘯𝘨 𝘴𝘦𝘯𝘨") 
         return                  
     if replied:
         SPAM_CHATS.append(message.chat.id)      
@@ -70,10 +70,10 @@ async def tag_all_users(_,message):
 @Bot.on_message(filters.command("cancel") & filters.group & Admin)
 async def untag(client, message: Message):
     if not message.chat.id in SPAM_CHATS:
-        return await message.reply("❏ Ngga ada proses tagallan seng☺︎")
+        return await message.reply("𝘕𝘨𝘨𝘢 𝘢𝘥𝘢 𝘱𝘳𝘰𝘴𝘦𝘴 𝘵𝘢𝘨𝘢𝘭𝘭𝘢𝘯 𝘯𝘪𝘩")
     else:
         try:
             SPAM_CHATS.remove(message.chat.id)
         except:
             pass
-        return await message.reply("❏ Proses tagall berhenti seng😋")
+        return await message.reply("𝘗𝘳𝘰𝘴𝘦𝘴 𝘵𝘢𝘨𝘢𝘭𝘭 𝘣𝘦𝘳𝘩𝘦𝘯𝘵𝘪 𝘴𝘦𝘯𝘨")
