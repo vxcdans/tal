@@ -10,8 +10,8 @@ API_HASH = os.environ.get("API_HASH", "ec4792a15370f92b3176ec66c6d7524a")
 
 LOGGER_ID = int(os.environ.get("LOGGER_ID", "-1002017577325"))
 
-MONGO_DB_URI = os.environ.get("MONGO_DB_URI", "mongodb+srv://mentionvii:IOgyOVDJtH7DYPnA@cluster0.mjow1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-DB_NAME = os.environ.get("DB_NAME", "yeflfny899")
+MONGO_DB_URI = os.environ.get("MONGO_DB_URI", "mongodb+srv://yahahahatagalal:RVxuFLY0U5irH2PY@cluster0.9pwhg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DB_NAME = os.environ.get("DB_NAME", "yahahahatagalal")
 BROADCAST_AS_COPY = True
 
 PLUG = dict(root="tagall/plugins")
