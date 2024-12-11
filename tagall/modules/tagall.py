@@ -26,7 +26,7 @@ Admin = filters.create(isAdmin)
 async def tag_all_users(_,message): 
     replied = message.reply_to_message  
     if len(message.command) < 2 and not replied:
-        await message.reply_text("<blockquote>𝘒𝘢𝘴𝘪𝘩 𝘵𝘦𝘹𝘵 𝘯𝘺𝘢 𝘥𝘰𝘯𝘨 𝘣𝘳𝘦</blockquote>") 
+        await message.reply_text("<blockquote>𝘢𝘥𝘥 𝘵𝘦𝘹𝘵 𝘰𝘳 𝘳𝘦𝘱𝘭𝘺 𝘵𝘦𝘹𝘵 𝘵𝘰 𝘳𝘶𝘯 𝘵𝘩𝘦 𝘥𝘢𝘵𝘦 𝘤𝘰𝘮𝘮𝘢𝘯𝘥</blockquote>") 
         return                  
     if replied:
         SPAM_CHATS.append(message.chat.id)      
@@ -70,10 +70,10 @@ async def tag_all_users(_,message):
 @Bot.on_message(filters.command("cancel") & filters.group & Admin)
 async def untag(client, message: Message):
     if not message.chat.id in SPAM_CHATS:
-        return await message.reply("<blockquote>𝘕𝘨𝘨𝘢 𝘢𝘥𝘢 𝘱𝘳𝘰𝘴𝘦𝘴 𝘵𝘢𝘨𝘢𝘭𝘭𝘢𝘯 𝘯𝘪𝘩</blockquote>")
+        return await message.reply("<blockquote>𝘯𝘰 𝘮𝘦𝘯𝘵𝘪𝘰𝘯 𝘱𝘳𝘰𝘤𝘦𝘴𝘴 𝘳𝘶𝘯𝘯𝘪𝘯𝘨</blockquote>")
     else:
         try:
             SPAM_CHATS.remove(message.chat.id)
         except:
             pass
-        return await message.reply("<blockquote>𝘗𝘳𝘰𝘴𝘦𝘴 𝘵𝘢𝘨𝘢𝘭𝘭 𝘣𝘦𝘳𝘩𝘦𝘯𝘵𝘪</blockquote>")
+        return await message.reply("<blockquote>𝘵𝘢𝘨𝘢𝘭𝘭 𝘱𝘳𝘰𝘤𝘦𝘴𝘴 𝘪𝘴 𝘴𝘵𝘰𝘱𝘱𝘦𝘥</blockquote>")
