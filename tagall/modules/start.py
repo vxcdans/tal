@@ -93,17 +93,17 @@ async def start_msgmessag(app : Bot, message : Message):
     username = bot.username
     kontol = message.from_user.id
     user = message.from_user.mention
-    log = await app.send_message(LOGGER_ID, f"Hei [Vii](tg://openmessage?user_id=728409811)\n\n {message.from_user.mention} Start your bot.\n\nUser Id: <code>{message.from_user.id}</code>\nUsername : @{message.from_user.username}")
+    log = await app.send_message(LOGGER_ID, f"<blockquote>Hei [Vii](tg://openmessage?user_id=728409811)\n\n {message.from_user.mention} Start your bot.\n\nUser Id: <code>{message.from_user.id}</code>\nUsername : @{message.from_user.username}</blockquote>")
     chat_type = message.chat.type
     if chat_type == CTYPE.PRIVATE:
-        msg = f"Hi {user}!**\n\n**@{username} is a bot developed by @viinotpii to be able to mention in your group.\n\nGood luck and always be happy {user}!"
+        msg = f"<blockquote>Hi {user}!**\n\n**@{username} is a bot developed by @viinotpii to be able to mention in your group.\n\nGood luck and always be happy {user}!</blockquote>"
         try:
             await message.reply(text=msg, reply_markup=inline)
         except FloodWait as e:
             await asyncio.sleep(e.value)
             await message.reply(text=msg, reply_markup=inline)
     elif chat_type in [CTYPE.GROUP, CTYPE.SUPERGROUP]:
-        msg = f"add me admin access to be able to do your command\n\n#By: {OWNER_NAME}"
+        msg = f"<blockquote>add me admin access to be able to do your command</blockquote>\n\n#By: {OWNER_NAME}"
 
         try:
             await message.reply(text=msg, reply_markup=inlinegc)
@@ -129,14 +129,14 @@ async def help_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(anjing())
     text = """**Tagall bot help menu**
 
-/tag : to mention members in your group
+<blockquote>/tag : to mention members in your group
 
 /cancel : to cancel mention
 
 just a tagall module,
 there's nothing special about this bot,
 the special one is you hehe.
-If you want to see other bots, just click below.
+If you want to see other bots, just click below.</blockquote>
 """
     await query.edit_message_text(
         text = text,
@@ -146,7 +146,7 @@ If you want to see other bots, just click below.
 @Bot.on_callback_query(filters.regex(r"oner"))
 async def oner_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(memek())
-    text = """Tuh cek aja siapa yang buat.\nBilang makasih dulu napa jangan main kabur aja"""
+    text = """<blockquote>Below is the development of the Tagall bot that you are using now, do you think this bot is very useful? Send a message thank you for the development, I am happy you are also happy.</blockquote>"""
     await query.edit_message_text(
         text = text,
         reply_markup = btn
@@ -155,7 +155,7 @@ async def oner_cbq(client: Bot, query: CallbackQuery):
 @Bot.on_callback_query(filters.regex(r"botgua"))
 async def botgua_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(tolol())
-    text = """<blockquote><b>List Bot Vii</b></blockquote>
+    text = """<b>List Bot Vii</b>
 
 Anti Gcast 
 @AntiBc2Bot
