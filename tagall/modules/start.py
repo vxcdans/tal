@@ -31,7 +31,7 @@ inline = InlineKeyboardMarkup(
         ],
         [
                     InlineKeyboardButton(text="👨‍💻 Owner", callback_data = "oner"),
-                    InlineKeyboardButton(text="📂 Menu Bantuan", callback_data = "help")
+                    InlineKeyboardButton(text="📂 Help Menu", callback_data = "help")
         ],
     ]
 )
@@ -40,7 +40,7 @@ def add_panel(username):
     button = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton(text="💎 Tambahkan Ke Group", url=f"http://t.me/{username}?startgroup=appstart")
+                InlineKeyboardButton(text="💎 Add To Group", url=f"http://t.me/{username}?startgroup=appstart")
             ]
         ]
     )
@@ -59,8 +59,8 @@ def admin_panel():
 def anjing():
     buttons = [
         [
-            InlineKeyboardButton(text="📋 List Bot", callback_data=f"botgua"),
-            InlineKeyboardButton(text="❌ Tutup",callback_data=f"balik")
+            InlineKeyboardButton(text="📋 List Bots", callback_data=f"botgua"),
+            InlineKeyboardButton(text="❌ Closed",callback_data=f"balik")
         ],
     ]
 
@@ -69,7 +69,7 @@ def anjing():
 def memek():
     buttons = [
         [
-            InlineKeyboardButton(text="❌ Tutup", callback_data=f"balik")
+            InlineKeyboardButton(text="❌ Closed", callback_data=f"balik")
         ],
         [
             InlineKeyboardButton(text="👨‍💻 Developer", url=f"http://t.me/viinotpii")
@@ -81,7 +81,7 @@ def memek():
 def tolol():
     buttons = [
         [
-            InlineKeyboardButton(text="❌ Tutup",callback_data=f"balik")
+            InlineKeyboardButton(text="❌ Closed",callback_data=f"balik")
         ],
     ]
 
@@ -93,17 +93,17 @@ async def start_msgmessag(app : Bot, message : Message):
     username = bot.username
     kontol = message.from_user.id
     user = message.from_user.mention
-    log = await app.send_message(LOGGER_ID, f"Liat [sayang](tg://openmessage?user_id=728409811)\n\nSi {message.from_user.mention} Start bot kamu.\n\nUser Id: <code>{message.from_user.id}</code>\nUsername : @{message.from_user.username}")
+    log = await app.send_message(LOGGER_ID, f"Hei [Vii](tg://openmessage?user_id=728409811)\n\n {message.from_user.mention} Start your bot.\n\nUser Id: <code>{message.from_user.id}</code>\nUsername : @{message.from_user.username}")
     chat_type = message.chat.type
     if chat_type == CTYPE.PRIVATE:
-        msg = f"Hai {user}!**\n\n**Aku @{username} adalah bot yang dibikin @viinotpii untuk bisa melakukan mention di grup kamu.\n\nSelamat mencoba beb {user}!"
+        msg = f"Hi {user}!**\n\n**@{username} is a bot developed by @viinotpii to be able to mention in your group.\n\nGood luck and always be happy {user}!"
         try:
             await message.reply(text=msg, reply_markup=inline)
         except FloodWait as e:
             await asyncio.sleep(e.value)
             await message.reply(text=msg, reply_markup=inline)
     elif chat_type in [CTYPE.GROUP, CTYPE.SUPERGROUP]:
-        msg = f"ihhh ga gitu tau 😡\n\njadiin aku admin dulu beb,kalo ngga dijadiin admin mana bisa mention di grup kamu nah,kalo kamu gatau cara make pc aja {OWNER_NAME}"
+        msg = f"add me admin access to be able to do your command\n\n#By: {OWNER_NAME}"
 
         try:
             await message.reply(text=msg, reply_markup=inlinegc)
@@ -115,28 +115,28 @@ async def start_msgmessag(app : Bot, message : Message):
 async def balik_cbq(client: Bot, query: CallbackQuery):
     try:
         await query.message.reply_to_message.delete()
-        await client.send_message(query.from_user.id, "Ih kamu kemana beb")
+        await client.send_message(query.from_user.id, "👋")
     except:
         pass
     try:
         await query.message.delete()
-        await client.send_message(query.from_user.id, "Dih malah pergi")
+        await client.send_message(query.from_user.id, "👋")
     except:
         pass
 
 @Bot.on_callback_query(filters.regex(r"help"))
 async def help_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(anjing())
-    text = """**Menu bantuan bot tagall**
+    text = """**Tagall bot help menu**
 
-/tag : untuk mention member beb
+/tag : to mention members in your group
 
-/cancel : untuk membatal mention nya beb
+/cancel : to cancel mention
 
-cuma modul tagall doang kok,
-gada yang spesial di bot ini,
-kan yang spesial itu kamu hehe🥰
-kalo mau liat bot lain tuh dibawah klik aja.
+just a tagall module,
+there's nothing special about this bot,
+the special one is you hehe.
+If you want to see other bots, just click below.
 """
     await query.edit_message_text(
         text = text,
@@ -160,8 +160,8 @@ async def botgua_cbq(client: Bot, query: CallbackQuery):
 Anti Gcast 
 @AntiBc2Bot
 
-Chatbot 
-@ViiChtBot
+Fsub 
+@VxFsubPremBot
 
 Music Manage Bot 
 @ViiMusicBot
