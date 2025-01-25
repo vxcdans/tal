@@ -7,4 +7,4 @@ python-dateutil
 schedule
 requests
 Pyromod==1.5
-git+https://github.com/hakutakaid/pyrogram
+git+https://github.com/viihome/PyroVii.git
