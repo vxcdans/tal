@@ -129,11 +129,13 @@ async def help_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(anjing())
     text = """**Tagall bot help menu**
 
-<blockquote>/tag : to mention members in your group
+<blockquote>/tagall : to mention members in your group
+/cancel : to cancel mention</blockquote>
 
-/cancel : to cancel mention
+<blockquote>/all : mention all members using emoticons
+/stopall : to stop mention</blockquote>
 
-just a tagall module,
+<blockquote>just a tagall module,
 there's nothing special about this bot,
 the special one is you hehe.
 If you want to see other bots, just click below.</blockquote>
