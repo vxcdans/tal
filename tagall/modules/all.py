@@ -58,7 +58,7 @@ async def tagall(client, message: Message):
             break
         usrnum += 1
         usrtxt += f"[{random.choice(emoji)}](tg://user?id={usr.user.id}) "
-        if usrnum == 5:
+        if usrnum == 8:
             txt = f"**{args}**\n\n{usrtxt}\n<blockquote>🛒@vstreid</blockquote>"
             try:
                 await client.send_message(chat_id, txt)
