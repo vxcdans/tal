@@ -88,10 +88,10 @@ on = emoji("on")
 off = emoji("off")
 dftr = emoji("daftar")
 
-@Bot.on_message(filters.command("dor") & filters.group & Admin)
+@Bot.on_message(filters.command("piw") & filters.group & Admin)
 async def add_user_to_blacklist(c, m):
     if len(m.command) != 2 and not m.reply_to_message:
-        await m.reply_text(f"{batal}**gunakan format** : `dor` **user id atau balas ke pesan untuk menambahkan ke daftar antigcast {Q}**", quote=True)
+        await m.reply_text(f"{batal} gunakan format** : `/piw` **user id atau balas ke pesan untuk menambahkan ke daftar antigcast {Q}", quote=True)
         return
 
     if m.reply_to_message:
@@ -111,20 +111,20 @@ async def add_user_to_blacklist(c, m):
     if user_id not in user_ids:
         user_ids.append(user_id)
         await user_collection.update_one({"_id": c.me.id}, {"$set": {"user_dia": user_ids}}, upsert=True)
-        await m.reply_text(f"{Q}**user dengan id** `{user_id}` **telah ditambahkan ke daftar antigcast** {dn}", quote=True)
+        await m.reply_text(f"user `{user_id}` ditambahkan ke daftar antigcast {dn}", quote=True)
     else:
-        await m.reply_text(f"{dn}**user tersebut sudah ada dalam daftar antigcast {Q}**", quote=True)
+        await m.reply_text(f"user tersebut sudah ada di daftar antigcast {Q}", quote=True)
 
 
-@Bot.on_message(filters.command("listdor") & filters.group & Admin)
+@Bot.on_message(filters.command("listpiw") & filters.group & Admin)
 async def display_blacklist(client, message):
     user_ids = await get_user_ids(client.me.id)
     await message.reply_text(f"{dftr} ini hasilnya : `{user_ids}`\n", quote=True)
 
-@Bot.on_message(filters.command("undor") & filters.group & Admin)
+@Bot.on_message(filters.command("unpiw") & filters.group & Admin)
 async def remove_user_from_blacklist(c, m):
     if len(m.command) != 2 and not m.reply_to_message:
-        await m.reply_text(f"{batal}**gunakan format** : `undor` **user id atau balas ke pesan untuk menghapus dari daftar antigcast {Q}**", quote=True)
+        await m.reply_text(f"gunakan format : `/unpiw` user id atau balas ke pesan untuk menghapus dari daftar antigcast {Q}", quote=True)
         return
 
     if m.reply_to_message:
@@ -136,34 +136,34 @@ async def remove_user_from_blacklist(c, m):
     if user_id in user_ids:
         user_ids.remove(user_id)
         await user_collection.update_one({"_id": c.me.id}, {"$set": {"user_dia": user_ids}}, upsert=True)
-        await m.reply_text(f"{Q}**user dengan id** `{user_id}` **telah dihapus dalam daftar antigcast** {dn}", quote=True)
+        await m.reply_text(f"user dengan id `{user_id}` telah dihapus dalam daftar antigcast {dn}", quote=True)
     else:
-        await m.reply_text(f"{Q}**user tersebut tidak ada dalam daftar antigcast {gagal}**", quote=True)
+        await m.reply_text(f"user tersebut tidak ada dalam daftar antigcast {gagal}", quote=True)
 
 @Bot.on_message(filters.command("cek") & filters.group & Admin)
 async def checkstatus(client, message):
     cek = await get_blacklist_status(client.me.id)
     if cek == True:
-        await message.reply_text(f"{Q}**anda sudah mengaktifkan antigcast**{dn}", quote=True)
+        await message.reply_text(f"Antigcast Aktif {dn}", quote=True)
     else:
-        await message.reply_text(f"{Q}**anda belum mengaktifkan antigcast**{gagal}", quote=True)        
+        await message.reply_text(f"Antigcast Tidak Aktif {gagal}", quote=True)        
 
 @Bot.on_message(filters.command("on") & filters.group & Admin)
 async def enable_blacklist(c, m):
     await set_blacklist_status(c.me.id, True)
-    await m.reply_text(f"{Q}**antigcast user berhasil di aktifkan** {on}", quote=True)
+    await m.reply_text(f"antigcast di aktifkan {on}", quote=True)
 
 @Bot.on_message(filters.command("off") & filters.group & Admin)
 async def disable_blacklist(c, m):
     await set_blacklist_status(c.me.id, False)
-    await m.reply_text(f"{Q}**antigcast user berhasil di matikan** {off}", quote=True)
+    await m.reply_text(f"antigcast di nonaktifkan {off}", quote=True)
 
 @Bot.on_message(filters.command("addgc") & filters.user(OWNER_ID))
 async def add_group_to_antigcast(c, m):
     type = (ChatType.GROUP, ChatType.SUPERGROUP)
 
     if m.chat.type not in type:
-        await m.reply_text(f"{gagal}gunakan fitur ini di grup!")
+        await m.reply_text(f"{gagal} gunakan fitur ini di grup!")
         return
 
     user_id = m.chat.id
@@ -171,9 +171,9 @@ async def add_group_to_antigcast(c, m):
     if user_id not in chat_ids:
         chat_ids.append(user_id)
         await gc.update_one({"_id": c.me.id}, {"$set": {"grup": chat_ids}}, upsert=True)
-        await m.reply_text(f"{Q}**grup dengan id** `{user_id}` **telah ditambahkan ke daftar antigcast** {dn}", quote=True)
+        await m.reply_text(f"grup dengan id `{user_id}` **telah ditambahkan ke daftar antigcast {dn}", quote=True)
     else:
-        await m.reply_text(f"{dn}**grup tersebut sudah ada dalam daftar antigcast {Q}**", quote=True)
+        await m.reply_text(f"grup tersebut sudah ada dalam daftar antigcast {Q}", quote=True)
 
 @Bot.on_message(filters.command("rmgc") & filters.user(OWNER_ID))
 async def remove_group_from_antigcast(c, m):
@@ -197,66 +197,15 @@ async def remove_group_from_antigcast(c, m):
     if chat_id in chat_ids:
         chat_ids.remove(chat_id)
         await gc.update_one({"_id": c.me.id}, {"$set": {"grup": chat_ids}}, upsert=True)
-        await m.reply_text(f"{Q} Grup dengan ID {chat_id} telah dihapus dari daftar antigcast {dn}", quote=True)
+        await m.reply_text(f" Grup dengan ID {chat_id} telah dihapus dari daftar antigcast {dn}", quote=True)
     else:
-        await m.reply_text(f"{Q} Grup dengan ID {chat_id} tidak ada dalam daftar antigcast {gagal}", quote=True)
+        await m.reply_text(f" Grup dengan ID {chat_id} tidak ada dalam daftar antigcast {gagal}", quote=True)
 
 
 @Bot.on_message(filters.command("listgc") & filters.user(OWNER_ID))
 async def display_antigcast(c, m):
     user_ids = await get_chat_ids(c.me.id)
-    await m.reply_text(f"{dftr}**daftar grup antigcast** : `{user_ids}` \n", quote=True)
-
-@Bot.on_message(filters.command("b") & filters.group & Admin)
-async def add_pesan(c, m):
-    _rply = m.reply_to_message
-    if not _rply:
-        await m.reply(f"mohon balas ke pengguna")
-        return    
-    user_text = _rply.text
-    msg_ids = await get_msg_ids(c.me.id)
-    if user_text not in msg_ids:
-        msg_ids.append(user_text)
-        await psnz.update_one({"_id": c.me.id}, {"$set": {"msg_text": msg_ids}}, upsert=True)
-        sukses = await m.reply_text(f"pesan {user_text} berhasil di tambahkan ke database{dn}", quote=True)
-        await _rply.delete()
-        await purge(m)
-        await sukses.delete()
-    else:
-        x = await m.reply_text(f"pesan sudah ada di dalam database{gagal}", quote=True)
-        await asyncio.sleep(0.5)
-        await x.delete()
-
-@Bot.on_message(filters.command("cekbl") & filters.group & Admin)
-async def strdb(client, message):
-    pesan = await get_msg_ids(client.me.id)
-    try:
-        await message.reply_text(pesan)
-    except MessageTooLong:
-        with open("db.txt", "a", encoding="utf-8") as file:
-            file.write(f"{pesan}\n")
-        kirim = await message.reply_document(db.txt)
-        if kirim:
-            os.remove("db.txt")
-
-@Bot.on_message(filters.command("rmah") & filters.group & Admin)
-async def remove_kata_from_blacklist(c, m):
-    if len(m.command) != 2 and not m.reply_to_message:
-        await m.reply_text(f"{batal}**gunakan format** : `rmkat` **user id atau balas ke pesan untuk menghapus dari daftar antigcast {Q}**", quote=True)
-        return
-
-    if m.reply_to_message:
-        user_id = m.reply_to_message.text
-    else:
-        user_id = " ".join(m.command[1:])
-
-    user_ids = await get_msg_ids(c.me.id)
-    if user_id in user_ids:
-        user_ids.remove(user_id)
-        await psnz.update_one({"_id": c.me.id}, {"$set": {"msg_text": user_ids}}, upsert=True)
-        await m.reply_text(f"{Q}**berhasil menghapus** `{user_id}` **dari daftar kata antigcast** {dn}", quote=True)
-    else:
-        await m.reply_text(f"{Q}**kata tersebut tidak ada dalam daftar antigcast {gagal}**", quote=True)
+    await m.reply_text(f"{dftr} daftar grup antigcast : `{user_ids}` \n", quote=True)
 
 
 
