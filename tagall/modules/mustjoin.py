@@ -10,7 +10,7 @@ from tagall.helpers.database import *
 
 #--------------------------
 
-MUST_JOIN = "rottensensorcom"
+MUST_JOIN = "vstreid"
 #------------------------
 @Bot.on_message(filters.incoming & filters.private, group=-1)
 async def must_join_channel(app: Client, msg: Message):
@@ -26,11 +26,11 @@ async def must_join_channel(app: Client, msg: Message):
                 chat_info = await app.get_chat(MUST_JOIN)
                 link = chat_info.invite_link
             try:
-                await msg.reply(text=f"<blockquote><b>kalo udah start sama dengan beli minimal beli yug kalo ga beli join ch gua ajah link di bawah .</b></blockquote>",
+                await msg.reply(text=f"Untuk menggunakan bot ini silahkan gabung dulu di channel dibawah.",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("Masuk Dulu", url=link),
+                                InlineKeyboardButton("Gabung Dulu", url=link),
                             ]
                         ]
                     )
@@ -39,4 +39,4 @@ async def must_join_channel(app: Client, msg: Message):
             except ChatWriteForbidden:
                 pass
     except ChatAdminRequired:
-        print(f"Jadiin Admin Dulu Bego Di Ch yang Mau Di Subs: {MUST_JOIN} !")
+        print(f"Jadikan admin bot nya di ch atau support: {MUST_JOIN} !")
