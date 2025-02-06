@@ -111,7 +111,7 @@ async def add_user_to_blacklist(c, m):
     if user_id not in user_ids:
         user_ids.append(user_id)
         await user_collection.update_one({"_id": c.me.id}, {"$set": {"user_dia": user_ids}}, upsert=True)
-        await m.reply_text(f"<i>user `{user_id}` ditambahkan ke daftar antigcast</i>", quote=True)
+        await m.reply_text(f"<i>✅ Added user `{user_id}`</i>", quote=True)
     else:
         await m.reply_text(f"<i>user tersebut sudah ada di daftar antigcast</i> {Q}", quote=True)
 
@@ -136,7 +136,7 @@ async def remove_user_from_blacklist(c, m):
     if user_id in user_ids:
         user_ids.remove(user_id)
         await user_collection.update_one({"_id": c.me.id}, {"$set": {"user_dia": user_ids}}, upsert=True)
-        await m.reply_text(f"user dengan id `{user_id}` telah dihapus dalam daftar antigcast {dn}", quote=True)
+        await m.reply_text(f"<i>✅ Aproved `{user_id}`</i>", quote=True)
     else:
         await m.reply_text(f"user tersebut tidak ada dalam daftar antigcast {gagal}", quote=True)
 
