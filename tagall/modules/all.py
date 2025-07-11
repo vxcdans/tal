@@ -59,7 +59,7 @@ async def tagall(client, message: Message):
         usrnum += 1
         usrtxt += f"[{random.choice(emoji)}](tg://user?id={usr.user.id}) "
         if usrnum == 8:
-            txt = f"**{args}**\n\n{usrtxt}\n<blockquote>🛒@vstreid</blockquote>"
+            txt = f"**{args}**\n\n<blockquote>{usrtxt}<blockquote>\n<blockquote>🛒@FlexiPedia</blockquote>"
             try:
                 await client.send_message(chat_id, txt)
             except FloodWait as e:
@@ -70,7 +70,7 @@ async def tagall(client, message: Message):
             usrnum = 0
             usrtxt = ""
     try:
-        await client.send_message(chat_id, "**Proses Tag All selesai.**")
+        await client.send_message(chat_id, "**<blockquote>Proses Tag All selesai<blockquote>**")
         spam_chats.remove(chat_id)
     except:
         pass
@@ -78,10 +78,10 @@ async def tagall(client, message: Message):
 @Bot.on_message(filters.command("stopall") & filters.group & Admin)
 async def untag(client, message: Message):
     if not message.chat.id in spam_chats:
-        return await message.reply("**Sepertinya tidak ada tagall disini.**")
+        return await message.reply("**<blockquote>Sepertinya tidak ada tagall disini.<blockquote>**")
     else:
         try:
             spam_chats.remove(message.chat.id)
         except:
             pass
-        return await message.reply("**Proses Tag All berhenti..**")
+        return await message.reply("**<blockquote>Proses Tag All berhenti..<blockquote>**")
