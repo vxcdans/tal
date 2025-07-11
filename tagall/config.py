@@ -2,16 +2,16 @@ import os
 import logging
 from logging.handlers import RotatingFileHandler
 
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "7847609440:AAEVD2xNxxW94BO5S8JvXHOSKUDh80e3Qf0")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
 BOT_WORKERS = int(os.environ.get("BOT_WORKERS", "4"))
 
-APP_ID = int(os.environ.get("APP_ID", "24706921"))
-API_HASH = os.environ.get("API_HASH", "ec4792a15370f92b3176ec66c6d7524a")
+APP_ID = int(os.environ.get("APP_ID", ""))
+API_HASH = os.environ.get("API_HASH", "")
 
-LOGGER_ID = int(os.environ.get("LOGGER_ID", "-1002017577325"))
+LOGGER_ID = int(os.environ.get("LOGGER_ID", ""))
 
-MONGO_DB_URI = os.environ.get("MONGO_DB_URI", "mongodb+srv://yahahahatagalal:RVxuFLY0U5irH2PY@cluster0.9pwhg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-DB_NAME = os.environ.get("DB_NAME", "yahahahatagalal")
+MONGO_DB_URI = os.environ.get("MONGO_DB_URI", "")
+DB_NAME = os.environ.get("DB_NAME", "")
 BROADCAST_AS_COPY = True
 
 PLUG = dict(root="tagall/plugins")
