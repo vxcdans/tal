@@ -17,8 +17,8 @@ CTYPE = enums.ChatType
 inlinegc = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton(text="👨‍💻 Owner", url="https://t.me/viinotpii"),
-            InlineKeyboardButton(text="🛒 Store", url="https://t.me/vstreid")
+            InlineKeyboardButton(text="👨‍💻 Owner", url="https://t.me/eldanskuy"),
+            InlineKeyboardButton(text="🛒 Store", url="https://t.me/FlexiPedia")
         ]
     ]
 )
@@ -26,8 +26,8 @@ inlinegc = InlineKeyboardMarkup(
 inline = InlineKeyboardMarkup(
     [
         [
-                    InlineKeyboardButton(text="🗳 Support", url="https://t.me/viicombot"),
-                    InlineKeyboardButton(text="🛒 Store", url="https://t.me/vstreid")
+                    InlineKeyboardButton(text="🗳 Support", url="https://t.me/eldanskuy"),
+                    InlineKeyboardButton(text="🛒 Store", url="https://t.me/FlexiPedia")
         ],
         [
                     InlineKeyboardButton(text="👨‍💻 Owner", callback_data = "oner"),
@@ -50,7 +50,7 @@ def add_panel(username):
 def admin_panel():
     buttons = [
         [
-            InlineKeyboardButton(text="👨‍💻 Owner", url=f"http://t.me/viinotpii")
+            InlineKeyboardButton(text="👨‍💻 Owner", url=f"http://t.me/eldanskuy")
         ],
     ]
 
@@ -72,7 +72,7 @@ def memek():
             InlineKeyboardButton(text="❌ Closed", callback_data=f"balik")
         ],
         [
-            InlineKeyboardButton(text="👨‍💻 Developer", url=f"http://t.me/viinotpii")
+            InlineKeyboardButton(text="👨‍💻 Developer", url=f"http://t.me/eldanskuy")
         ],
     ]
 
@@ -93,10 +93,10 @@ async def start_msgmessag(app : Bot, message : Message):
     username = bot.username
     kontol = message.from_user.id
     user = message.from_user.mention
-    log = await app.send_message(LOGGER_ID, f"<blockquote>Hei [Vii](tg://openmessage?user_id=728409811)\n\n {message.from_user.mention} Start your bot.\n\nUser Id: <code>{message.from_user.id}</code>\nUsername : @{message.from_user.username}</blockquote>")
+    log = await app.send_message(LOGGER_ID, f"<blockquote>Hei [Dante](tg://openmessage?user_id=6735026878)\n\n {message.from_user.mention} Start your bot.\n\nUser Id: <code>{message.from_user.id}</code>\nUsername : @{message.from_user.username}</blockquote>")
     chat_type = message.chat.type
     if chat_type == CTYPE.PRIVATE:
-        msg = f"<blockquote>Hi {user}!**\n\n**@{username} is a bot developed by @viinotpii to be able to mention in your group.\n\nGood luck and always be happy {user}!</blockquote>"
+        msg = f"<blockquote>Hi {user}!**\n\n**@{username} is a bot developed by @eldanskuy to be able to mention in your group.\n\nGood luck and always be happy {user}!</blockquote>"
         try:
             await message.reply(text=msg, reply_markup=inline)
         except FloodWait as e:
@@ -124,7 +124,7 @@ async def balik_cbq(client: Bot, query: CallbackQuery):
     except:
         pass
 
-@Bot.on_callback_query(filters.regex(r"help"))
+@Bot.on_callback_query(filters.regex(r"h"))
 async def help_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(anjing())
     text = """**Tagall bot help menu**
@@ -157,25 +157,10 @@ async def oner_cbq(client: Bot, query: CallbackQuery):
 @Bot.on_callback_query(filters.regex(r"botgua"))
 async def botgua_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(tolol())
-    text = """<b>List Bot Vii</b>
+    text = """<b>List Bot Dante</b>
 
-Anti Gcast 
-@AntiBc2Bot
-
-Fsub 
-@VxFsubPremBot
-
-Music Manage Bot 
-@ViiMusicBot
-
-Mention/Tagall 
-@VMentionBot
-
-Userbot 1
-@VT_Ubot
-
-Userbot 2
-@V1ViiUbot"""
+Music + Tagall Bot 
+@evomusicsbot"""
     await query.edit_message_text(
         text = text,
         reply_markup = btn
