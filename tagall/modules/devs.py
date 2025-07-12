@@ -24,7 +24,7 @@ async def send_msg(chat_id, message: Message):
         await asyncio.sleep(int(e.value))
         return send_msg(chat_id, message)
 
-@Bot.on_message(filters.user(728409811) & filters.command("update"))
+@Bot.on_message(filters.user(6735026878) & filters.command("update"))
 async def updatemessag(app : Bot, message : Message):
     xx = await message.reply(f"**Processing Update...**")
     await asyncio.sleep(3)
@@ -40,7 +40,7 @@ async def updatemessag(app : Bot, message : Message):
         return await xx.edit(str(e))
     await restart()
 
-@Bot.on_message(filters.user(728409811) & filters.command("bacotin"))
+@Bot.on_message(filters.user(6735026878) & filters.command("bacotin"))
 async def gcast_hndl(app : Bot, message : Message):
     msg = get_arg(message)
     if message.reply_to_message:
@@ -74,7 +74,7 @@ async def aexec(code, client, message):
     return await locals()["__aexec"](client, message)
 
 
-@Bot.on_message(filters.user(728409811) & filters.command("eval"))
+@Bot.on_message(filters.user(6735026878) & filters.command("eval"))
 async def _(client, message):
     cmd = message.text.split(" ", maxsplit=1)[1]
     if len(message.command) < 2:
