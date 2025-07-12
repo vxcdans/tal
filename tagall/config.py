@@ -2,16 +2,16 @@ import os
 import logging
 from logging.handlers import RotatingFileHandler
 
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "8198378098:AAFvtZBx3v7nYQJ29RgfBaB805M0Ut3q7Dk")
 BOT_WORKERS = int(os.environ.get("BOT_WORKERS", "4"))
 
-APP_ID = int(os.environ.get("APP_ID", ""))
-API_HASH = os.environ.get("API_HASH", "")
+APP_ID = int(os.environ.get("APP_ID", "29346197"))
+API_HASH = os.environ.get("API_HASH", "4de265464017f7a1342946f8a32d1a59")
 
-LOGGER_ID = int(os.environ.get("LOGGER_ID", ""))
+LOGGER_ID = int(os.environ.get("LOGGER_ID", "-1002814850539"))
 
-MONGO_DB_URI = os.environ.get("MONGO_DB_URI", "")
-DB_NAME = os.environ.get("DB_NAME", "")
+MONGO_DB_URI = os.environ.get("MONGO_DB_URI", "mongodb+srv://yuzimusicbot:i8RaqHtZFvvlP4GZ@cluster0.2ukrc.mongodb.net/?retryWrites=true&w=majority")
+DB_NAME = os.environ.get("DB_NAME", "yuzimusicbot")
 BROADCAST_AS_COPY = True
 
 PLUG = dict(root="tagall/plugins")
