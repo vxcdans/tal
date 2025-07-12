@@ -87,7 +87,7 @@ def tolol():
 
     return buttons
 
-@Bot.on_message(filters.command("start"))
+@Bot.on_message(filters.command("s"))
 async def start_msgmessag(app : Bot, message : Message):
     bot = await app.get_me()
     username = bot.username
