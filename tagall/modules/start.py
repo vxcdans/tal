@@ -31,7 +31,7 @@ inline = InlineKeyboardMarkup(
         ],
         [
                     InlineKeyboardButton(text="👨‍💻 Owner", callback_data = "oner"),
-                    InlineKeyboardButton(text="📂 Help Menu", callback_data = "help")
+                    InlineKeyboardButton(text="📂 Help Menu", callback_data = "h")
         ],
     ]
 )
@@ -124,7 +124,7 @@ async def balik_cbq(client: Bot, query: CallbackQuery):
     except:
         pass
 
-@Bot.on_callback_query(filters.regex(r"h"))
+@Bot.on_callback_query(filters.regex(r"menu"))
 async def help_cbq(client: Bot, query: CallbackQuery):
     btn = InlineKeyboardMarkup(anjing())
     text = """**Tagall bot help menu**
