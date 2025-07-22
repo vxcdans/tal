@@ -59,7 +59,7 @@ async def tagall(client, message: Message):
         usrnum += 1
         usrtxt += f"[{random.choice(emoji)}](tg://user?id={usr.user.id}) "
         if usrnum == 8:
-            txt = f"<blockquote>**{args}**\n\n{usrtxt}\n🛒@FlexiPedia</blockquote>"
+            txt = f"**{args}**\n\n<blockquote>{usrtxt}\n🛒@FlexiPedia</blockquote>"
             try:
                 await client.send_message(chat_id, txt)
             except FloodWait as e:
