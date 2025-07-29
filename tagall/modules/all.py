@@ -75,7 +75,7 @@ async def tagall(client, message: Message):
     except:
         pass
 
-@Bot.on_message(filters.command("stopall") & filters.group & Admin)
+@Bot.on_message(filters.command("cancel") & filters.group & Admin)
 async def untag(client, message: Message):
     if not message.chat.id in spam_chats:
         return await message.reply("<blockquote>Sepertinya tidak ada tagall disini.<blockquote>")
