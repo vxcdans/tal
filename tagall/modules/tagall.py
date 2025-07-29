@@ -16,7 +16,7 @@ from tagall.helpers.database import *
 
 STATUS = enums.ChatMemberStatus
 SPAM_CHATS = []
-emoji = "💌".split(
+emoji = "💌,👻,🤡".split(
     " "
 )
 
