@@ -1,5 +1,6 @@
 import asyncio
 import time
+import html
 
 from pyrogram import enums, filters
 from pyrogram.types import (
@@ -14,13 +15,11 @@ from tagall import Bot
 STATUS = enums.ChatMemberStatus
 SPAM_CHATS = set()
 PENDING_TAGALL = {}
+RUN_INFO = {}
 TIMER_OPTIONS = (1, 3, 5, 10, 30, 60)
 
-
-def store_keyboard():
-    return InlineKeyboardMarkup(
-        [[InlineKeyboardButton("🛒 STORE", url="https://t.me/odistupa")]]
-    )
+CHANNEL_URL = "https://t.me/fvckdans"
+FOOTER = "🐉 Powered by: fvckdante"
 
 
 def timer_keyboard(chat_id, user_id):
@@ -30,25 +29,38 @@ def timer_keyboard(chat_id, user_id):
             callback_data=f"tagall_timer:{minutes}:{chat_id}:{user_id}",
         )
 
-    return InlineKeyboardMarkup(
-        [
-            [button(1), button(3)],
-            [button(5), button(10)],
-            [button(30), button(60)],
-            [
-                InlineKeyboardButton(
-                    "∞ Selamanya",
-                    callback_data=f"tagall_timer:forever:{chat_id}:{user_id}",
-                )
-            ],
-            [
-                InlineKeyboardButton(
-                    "🚫 Batal",
-                    callback_data=f"tagall_cancel:{chat_id}:{user_id}",
-                )
-            ],
-        ]
-    )
+    return InlineKeyboardMarkup([
+        [button(1), button(3)],
+        [button(5), button(10)],
+        [button(30), button(60)],
+        [InlineKeyboardButton(
+            "∞ Selamanya",
+            callback_data=f"tagall_timer:forever:{chat_id}:{user_id}",
+        )],
+        [InlineKeyboardButton(
+            "🚫 Batal",
+            callback_data=f"tagall_cancel:{chat_id}:{user_id}",
+        )],
+    ])
+
+
+def tag_keyboard(chat_id):
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton("BUKA CHANNEL", url=CHANNEL_URL)],
+        [InlineKeyboardButton(
+            "🛑 Stop Tag",
+            callback_data=f"tagall_stop:{chat_id}",
+        )],
+    ])
+
+
+def report_keyboard(chat_id):
+    return InlineKeyboardMarkup([[
+        InlineKeyboardButton(
+            "🗑 Hapus Tag",
+            callback_data=f"tagall_delete:{chat_id}",
+        )
+    ]])
 
 
 async def is_chat_admin(client, chat_id, user_id):
@@ -59,31 +71,54 @@ async def is_chat_admin(client, chat_id, user_id):
         return False
 
 
+async def delete_tag_messages(client, chat_id, message_ids):
+    for message_id in message_ids:
+        try:
+            await client.delete_messages(chat_id, message_id)
+        except Exception:
+            pass
+
+
+async def auto_delete(client, chat_id):
+    await asyncio.sleep(60)
+    info = RUN_INFO.pop(chat_id, None)
+    if info:
+        await delete_tag_messages(client, chat_id, info["messages"])
+
+
 @Bot.on_message(filters.command("utag") & filters.group)
 async def tag_all_users(client, message: Message):
     if not message.from_user or not await is_chat_admin(
         client, message.chat.id, message.from_user.id
     ):
-        return await message.reply_text("Hanya admin grup yang dapat menggunakan perintah ini.")
+        return await message.reply_text(
+            "Hanya admin grup yang dapat menggunakan perintah ini."
+        )
 
     chat_id = message.chat.id
+
     if chat_id in SPAM_CHATS or chat_id in PENDING_TAGALL:
-        return await message.reply_text("Tagall sedang berjalan atau menunggu pilihan timer.")
+        return await message.reply_text(
+            "Tagall sedang berjalan atau menunggu pilihan timer."
+        )
 
     replied = message.reply_to_message
     text = message.text.split(None, 1)[1] if len(message.command) > 1 else None
+
     if not replied and not text:
         return await message.reply_text(
-            "Gunakan /tagall diikuti teks, atau balas pesan yang ingin disertakan."
+            "Gunakan /utag diikuti teks, atau balas pesan yang ingin disertakan."
         )
 
     PENDING_TAGALL[chat_id] = {
         "user_id": message.from_user.id,
+        "admin_name": message.from_user.first_name or "Admin",
         "text": text,
         "reply_id": replied.id if replied else None,
     }
+
     await message.reply_text(
-        "Pilih durasi Tagall. Proses akan berhenti otomatis setelah waktu habis:",
+        "Pilih durasi Tagall:",
         reply_markup=timer_keyboard(chat_id, message.from_user.id),
     )
 
@@ -127,10 +162,18 @@ async def start_tagall_timer(client, query):
 
     pending = PENDING_TAGALL.pop(chat_id, None)
     if not pending or chat_id in SPAM_CHATS:
-        return await query.answer("Permintaan sudah kedaluwarsa atau Tagall sedang berjalan.", show_alert=True)
+        return await query.answer("Permintaan kedaluwarsa atau Tagall sedang berjalan.", show_alert=True)
 
     SPAM_CHATS.add(chat_id)
     label = "Selamanya" if duration is None else f"{selected} menit"
+
+    RUN_INFO[chat_id] = {
+        "started": time.monotonic(),
+        "duration": label,
+        "admin": pending["admin_name"],
+        "messages": [],
+    }
+
     await query.answer(f"Tagall dimulai: {label}.")
     await query.message.edit_text(f"Tagall dimulai. Durasi: {label}.")
 
@@ -151,31 +194,45 @@ async def run_tagall(client, chat_id, text, reply_id, duration):
     mentions = []
 
     try:
+        chat = await client.get_chat(chat_id)
+        group_name = html.escape(chat.title or "Grup")
+        safe_text = html.escape(text) if text else None
+
         async for member in client.get_chat_members(chat_id):
-            if chat_id not in SPAM_CHATS or (deadline is not None and time.monotonic() >= deadline):
+            if chat_id not in SPAM_CHATS:
                 break
+
+            if deadline is not None and time.monotonic() >= deadline:
+                break
+
             if not member.user or member.user.is_bot or member.user.is_deleted:
                 continue
 
-            name = " ".join(filter(None, [member.user.first_name, member.user.last_name])) or "Pengguna"
             mentions.append(
-                f"[{name}](tg://user?id={member.user.id})"
+                f'<a href="tg://user?id={member.user.id}">🕳️</a>'
             )
 
             if len(mentions) >= 5:
-                body = "\n".join(mentions)
-                if text:
-                    body = f"<b>{text}</b>\n\n{body}"
+                body = (
+                    f"<b>{group_name}</b>\n\n"
+                    f"<b>TagAll:</b>\n"
+                    + " ".join(mentions)
+                )
+
+                if safe_text:
+                    body = f"{body}\n\n{safe_text}"
+
+                body += f"\n\n{FOOTER}"
+
                 try:
-                    if reply_id:
-                        await client.send_message(
-                            chat_id, body, reply_to_message_id=reply_id,
-                            reply_markup=store_keyboard(),
-                        )
-                    else:
-                        await client.send_message(
-                            chat_id, body, reply_markup=store_keyboard()
-                        )
+                    sent = await client.send_message(
+                        chat_id,
+                        body,
+                        reply_to_message_id=reply_id,
+                        reply_markup=tag_keyboard(chat_id),
+                        parse_mode=enums.ParseMode.HTML,
+                        disable_web_page_preview=True,
+                    )
                 except FloodWait as error:
                     wait_seconds = getattr(error, "value", 1)
                     if deadline is not None and time.monotonic() + wait_seconds >= deadline:
@@ -183,34 +240,114 @@ async def run_tagall(client, chat_id, text, reply_id, duration):
                     await asyncio.sleep(wait_seconds)
                     continue
 
+                RUN_INFO[chat_id]["messages"].append(sent.id)
                 count += len(mentions)
                 mentions.clear()
                 await asyncio.sleep(2)
 
-        if mentions and chat_id in SPAM_CHATS and (deadline is None or time.monotonic() < deadline):
-            body = "\n".join(mentions)
-            if text:
-                body = f"<b>{text}</b>\n\n{body}"
-            if reply_id:
-                await client.send_message(
-                    chat_id, body, reply_to_message_id=reply_id,
-                    reply_markup=store_keyboard(),
-                )
-            else:
-                await client.send_message(
-                    chat_id, body, reply_markup=store_keyboard()
-                )
+        if mentions and chat_id in SPAM_CHATS:
+            body = (
+                f"<b>{group_name}</b>\n\n"
+                f"<b>TagAll:</b>\n"
+                + " ".join(mentions)
+            )
+
+            if safe_text:
+                body = f"{body}\n\n{safe_text}"
+
+            body += f"\n\n{FOOTER}"
+
+            sent = await client.send_message(
+                chat_id,
+                body,
+                reply_to_message_id=reply_id,
+                reply_markup=tag_keyboard(chat_id),
+                parse_mode=enums.ParseMode.HTML,
+                disable_web_page_preview=True,
+            )
+
+            RUN_INFO[chat_id]["messages"].append(sent.id)
             count += len(mentions)
 
-        if chat_id in SPAM_CHATS:
-            await client.send_message(
-                chat_id,
-                f"Tagall selesai otomatis. Total anggota yang disebut: {count}.",
-            )
     except Exception as error:
-        await client.send_message(chat_id, f"Tagall dihentikan karena error: {error}")
+        print(f"Tagall error: {error}")
+
     finally:
         SPAM_CHATS.discard(chat_id)
+
+        info = RUN_INFO.get(chat_id)
+
+        if info:
+            elapsed = int(time.monotonic() - info["started"])
+            minutes, seconds = divmod(elapsed, 60)
+
+            report = (
+                "🛑 <b>TagAll dihentikan!</b>\n\n"
+                f"⏱ Durasi pilihan: <b>{info['duration']}</b>\n"
+                f"⌛ Waktu berjalan: <b>{minutes} menit {seconds} detik</b>\n"
+                f"👤 Admin: <b>{html.escape(info['admin'])}</b>\n"
+                f"👥 Total disebut: <b>{count}</b>\n\n"
+                f"{FOOTER}\n\n"
+                "Pesan TagAll dan laporan akan dihapus otomatis dalam 1 menit."
+            )
+
+            try:
+                report_message = await client.send_message(
+                    chat_id,
+                    report,
+                    reply_markup=report_keyboard(chat_id),
+                    parse_mode=enums.ParseMode.HTML,
+                )
+                info["messages"].append(report_message.id)
+                asyncio.create_task(auto_delete(client, chat_id))
+            except Exception as error:
+                print(f"Tagall report error: {error}")
+                RUN_INFO.pop(chat_id, None)
+
+
+@Bot.on_callback_query(filters.regex(r"^tagall_stop:"))
+async def stop_tagall_button(client, query):
+    try:
+        chat_id = int(query.data.split(":")[1])
+    except (ValueError, IndexError):
+        return await query.answer("Tombol tidak valid.", show_alert=True)
+
+    if query.message.chat.id != chat_id:
+        return await query.answer("Tombol tidak valid.", show_alert=True)
+
+    if not await is_chat_admin(client, chat_id, query.from_user.id):
+        return await query.answer("Hanya admin yang dapat menghentikan Tagall.", show_alert=True)
+
+    if chat_id not in SPAM_CHATS:
+        return await query.answer("Tagall sudah berhenti.", show_alert=True)
+
+    SPAM_CHATS.discard(chat_id)
+    await query.answer("Tagall dihentikan.")
+
+
+@Bot.on_callback_query(filters.regex(r"^tagall_delete:"))
+async def delete_tagall_button(client, query):
+    try:
+        chat_id = int(query.data.split(":")[1])
+    except (ValueError, IndexError):
+        return await query.answer("Tombol tidak valid.", show_alert=True)
+
+    if query.message.chat.id != chat_id:
+        return await query.answer("Tombol tidak valid.", show_alert=True)
+
+    if not await is_chat_admin(client, chat_id, query.from_user.id):
+        return await query.answer("Hanya admin yang dapat menghapus laporan.", show_alert=True)
+
+    info = RUN_INFO.pop(chat_id, None)
+    await query.answer("Pesan TagAll dihapus.")
+
+    if info:
+        await delete_tag_messages(client, chat_id, info["messages"])
+    else:
+        try:
+            await query.message.delete()
+        except Exception:
+            pass
 
 
 @Bot.on_message(filters.command("cancel") & filters.group)
@@ -218,12 +355,17 @@ async def untag(client, message: Message):
     if not message.from_user or not await is_chat_admin(
         client, message.chat.id, message.from_user.id
     ):
-        return await message.reply_text("Hanya admin grup yang dapat menghentikan Tagall.")
+        return await message.reply_text(
+            "Hanya admin grup yang dapat menghentikan Tagall."
+        )
 
     chat_id = message.chat.id
     PENDING_TAGALL.pop(chat_id, None)
+
     if chat_id not in SPAM_CHATS:
-        return await message.reply_text("Tidak ada proses Tagall yang sedang berjalan.")
+        return await message.reply_text(
+            "Tidak ada proses Tagall yang sedang berjalan."
+        )
 
     SPAM_CHATS.discard(chat_id)
-    return await message.reply_text("Proses Tagall dihentikan.")
+    await message.reply_text("Proses Tagall dihentikan.")
