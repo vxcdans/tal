@@ -36,12 +36,6 @@ def timer_keyboard(chat_id, user_id):
                 )
                 for minutes in TIMER_OPTIONS[3:]
             ],
-            [
-                InlineKeyboardButton(
-                    "🛒 STORE",
-                    url="https://t.me/odistupa",
-                )
-            ],
         ]
     )
 
@@ -104,7 +98,12 @@ async def start_tagall_timer(client, query):
 
     SPAM_CHATS.add(chat_id)
     await query.answer(f"Tagall dimulai selama {minutes} menit.")
-    await query.message.edit_text(f"Tagall dimulai. Durasi: {minutes} menit.")
+    await query.message.edit_text(
+        f"Tagall dimulai. Durasi: {minutes} menit.",
+        reply_markup=InlineKeyboardMarkup(
+            [[InlineKeyboardButton("🛒 STORE", url="https://t.me/odistupa")]]
+        ),
+    )
 
     asyncio.create_task(
         run_tagall(
