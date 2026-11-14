@@ -19,6 +19,12 @@ EMOJIS = ["💌", "👻", "🤡"]
 TIMER_OPTIONS = (1, 3, 5, 8, 10)
 
 
+def store_keyboard():
+    return InlineKeyboardMarkup(
+        [[InlineKeyboardButton("🛒 STORE", url="https://t.me/odistupa")]]
+    )
+
+
 def timer_keyboard(chat_id, user_id):
     return InlineKeyboardMarkup(
         [
@@ -98,12 +104,7 @@ async def start_tagall_timer(client, query):
 
     SPAM_CHATS.add(chat_id)
     await query.answer(f"Tagall dimulai selama {minutes} menit.")
-    await query.message.edit_text(
-        f"Tagall dimulai. Durasi: {minutes} menit.",
-        reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("🛒 STORE", url="https://t.me/odistupa")]]
-        ),
-    )
+    await query.message.edit_text(f"Tagall dimulai. Durasi: {minutes} menit.")
 
     asyncio.create_task(
         run_tagall(
@@ -140,10 +141,13 @@ async def run_tagall(client, chat_id, text, reply_id, duration):
                 try:
                     if reply_id:
                         await client.send_message(
-                            chat_id, body, reply_to_message_id=reply_id
+                            chat_id, body, reply_to_message_id=reply_id,
+                            reply_markup=store_keyboard(),
                         )
                     else:
-                        await client.send_message(chat_id, body)
+                        await client.send_message(
+                            chat_id, body, reply_markup=store_keyboard()
+                        )
                 except FloodWait as error:
                     wait_seconds = getattr(error, "value", 1)
                     if time.monotonic() + wait_seconds >= deadline:
@@ -160,9 +164,14 @@ async def run_tagall(client, chat_id, text, reply_id, duration):
             if text:
                 body = f"<b>{text}</b>\n\n{body}"
             if reply_id:
-                await client.send_message(chat_id, body, reply_to_message_id=reply_id)
+                await client.send_message(
+                    chat_id, body, reply_to_message_id=reply_id,
+                    reply_markup=store_keyboard(),
+                )
             else:
-                await client.send_message(chat_id, body)
+                await client.send_message(
+                    chat_id, body, reply_markup=store_keyboard()
+                )
             count += len(mentions)
 
         if chat_id in SPAM_CHATS:
