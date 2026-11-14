@@ -8,4 +8,5 @@ python-dateutil
 schedule
 requests
 Pyromod==1.5
+python-dotenv
 git+https://github.com/hakutakaid/pyrogram
