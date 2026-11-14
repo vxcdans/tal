@@ -1,5 +1,4 @@
 import asyncio
-import random
 import time
 
 from pyrogram import enums, filters
@@ -15,7 +14,6 @@ from tagall import Bot
 STATUS = enums.ChatMemberStatus
 SPAM_CHATS = set()
 PENDING_TAGALL = {}
-EMOJIS = ["💌", "👻", "🤡"]
 TIMER_OPTIONS = (1, 3, 5, 10, 30, 60)
 
 
@@ -61,7 +59,7 @@ async def is_chat_admin(client, chat_id, user_id):
         return False
 
 
-@Bot.on_message(filters.command("tagall") & filters.group)
+@Bot.on_message(filters.command("utag") & filters.group)
 async def tag_all_users(client, message: Message):
     if not message.from_user or not await is_chat_admin(
         client, message.chat.id, message.from_user.id
@@ -159,9 +157,9 @@ async def run_tagall(client, chat_id, text, reply_id, duration):
             if not member.user or member.user.is_bot or member.user.is_deleted:
                 continue
 
-            name = member.user.first_name or "Pengguna"
+            name = " ".join(filter(None, [member.user.first_name, member.user.last_name])) or "Pengguna"
             mentions.append(
-                f"{random.choice(EMOJIS)} [{name}](tg://user?id={member.user.id})"
+                f"[{name}](tg://user?id={member.user.id})"
             )
 
             if len(mentions) >= 5:
