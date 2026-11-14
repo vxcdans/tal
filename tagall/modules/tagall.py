@@ -19,7 +19,7 @@ RUN_INFO = {}
 TIMER_OPTIONS = (1, 3, 5, 10, 30, 60)
 
 CHANNEL_URL = "https://t.me/fvckdans"
-FOOTER = "🐉 Powered by: fvckdante"
+FOOTER = "✨ Powered by : fvckdante"
 
 
 def timer_keyboard(chat_id, user_id):
@@ -214,15 +214,15 @@ async def run_tagall(client, chat_id, text, reply_id, duration):
 
             if len(mentions) >= 5:
                 body = (
-                    f"<b>{group_name}</b>\n\n"
+                    f"📢 <b>{group_name}</b>\n\n"
                     f"<b>TagAll:</b>\n"
-                    + " ".join(mentions)
+                    + " , ".join(mentions)
                 )
 
                 if safe_text:
                     body = f"{body}\n\n{safe_text}"
 
-                body += f"\n\n{FOOTER}"
+                body += f"\n\n{FOOTER}\n\n{CHANNEL_URL}"
 
                 try:
                     sent = await client.send_message(
@@ -231,7 +231,7 @@ async def run_tagall(client, chat_id, text, reply_id, duration):
                         reply_to_message_id=reply_id,
                         reply_markup=tag_keyboard(chat_id),
                         parse_mode=enums.ParseMode.HTML,
-                        disable_web_page_preview=True,
+                        disable_web_page_preview=False,
                     )
                 except FloodWait as error:
                     wait_seconds = getattr(error, "value", 1)
@@ -247,15 +247,15 @@ async def run_tagall(client, chat_id, text, reply_id, duration):
 
         if mentions and chat_id in SPAM_CHATS:
             body = (
-                f"<b>{group_name}</b>\n\n"
+                f"📢 <b>{group_name}</b>\n\n"
                 f"<b>TagAll:</b>\n"
-                + " ".join(mentions)
+                + " , ".join(mentions)
             )
 
             if safe_text:
                 body = f"{body}\n\n{safe_text}"
 
-            body += f"\n\n{FOOTER}"
+            body += f"\n\n{FOOTER}\n\n{CHANNEL_URL}"
 
             sent = await client.send_message(
                 chat_id,
@@ -263,7 +263,7 @@ async def run_tagall(client, chat_id, text, reply_id, duration):
                 reply_to_message_id=reply_id,
                 reply_markup=tag_keyboard(chat_id),
                 parse_mode=enums.ParseMode.HTML,
-                disable_web_page_preview=True,
+                disable_web_page_preview=False,
             )
 
             RUN_INFO[chat_id]["messages"].append(sent.id)
