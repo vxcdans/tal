@@ -36,6 +36,12 @@ def timer_keyboard(chat_id, user_id):
                 )
                 for minutes in TIMER_OPTIONS[3:]
             ],
+            [
+                InlineKeyboardButton(
+                    "🛒 STORE",
+                    url="https://t.me/odistupa",
+                )
+            ],
         ]
     )
 
