@@ -16,7 +16,7 @@ STATUS = enums.ChatMemberStatus
 SPAM_CHATS = set()
 PENDING_TAGALL = {}
 EMOJIS = ["💌", "👻", "🤡"]
-TIMER_OPTIONS = (1, 3, 5, 8, 10)
+TIMER_OPTIONS = (1, 3, 5, 10, 30, 60)
 
 
 def store_keyboard():
@@ -26,21 +26,28 @@ def store_keyboard():
 
 
 def timer_keyboard(chat_id, user_id):
+    def button(minutes):
+        return InlineKeyboardButton(
+            f"{minutes} menit",
+            callback_data=f"tagall_timer:{minutes}:{chat_id}:{user_id}",
+        )
+
     return InlineKeyboardMarkup(
         [
+            [button(1), button(3)],
+            [button(5), button(10)],
+            [button(30), button(60)],
             [
                 InlineKeyboardButton(
-                    f"{minutes} menit",
-                    callback_data=f"tagall_timer:{minutes}:{chat_id}:{user_id}",
+                    "∞ Selamanya",
+                    callback_data=f"tagall_timer:forever:{chat_id}:{user_id}",
                 )
-                for minutes in TIMER_OPTIONS[:2]
             ],
             [
                 InlineKeyboardButton(
-                    f"{minutes} menit",
-                    callback_data=f"tagall_timer:{minutes}:{chat_id}:{user_id}",
+                    "🚫 Batal",
+                    callback_data=f"tagall_cancel:{chat_id}:{user_id}",
                 )
-                for minutes in (5, 10, 8)
             ],
         ]
     )
@@ -83,11 +90,33 @@ async def tag_all_users(client, message: Message):
     )
 
 
+@Bot.on_callback_query(filters.regex(r"^tagall_cancel:"))
+async def cancel_tagall_timer(client, query):
+    try:
+        _, chat_id, user_id = query.data.split(":")
+        chat_id, user_id = int(chat_id), int(user_id)
+    except (ValueError, AttributeError):
+        return await query.answer("Tombol tidak valid.", show_alert=True)
+
+    if query.message.chat.id != chat_id or query.from_user.id != user_id:
+        return await query.answer("Tombol ini bukan untuk Anda.", show_alert=True)
+
+    if not await is_chat_admin(client, chat_id, query.from_user.id):
+        return await query.answer("Hanya admin yang dapat membatalkan.", show_alert=True)
+
+    if PENDING_TAGALL.pop(chat_id, None) is None:
+        return await query.answer("Pilihan timer sudah kedaluwarsa.", show_alert=True)
+
+    await query.answer("Pilihan timer dibatalkan.")
+    await query.message.edit_text("Pilihan timer Tagall dibatalkan.")
+
+
 @Bot.on_callback_query(filters.regex(r"^tagall_timer:"))
 async def start_tagall_timer(client, query):
     try:
-        _, minutes, chat_id, user_id = query.data.split(":")
-        minutes, chat_id, user_id = int(minutes), int(chat_id), int(user_id)
+        _, selected, chat_id, user_id = query.data.split(":")
+        chat_id, user_id = int(chat_id), int(user_id)
+        duration = None if selected == "forever" else int(selected) * 60
     except (ValueError, AttributeError):
         return await query.answer("Pilihan timer tidak valid.", show_alert=True)
 
@@ -103,8 +132,9 @@ async def start_tagall_timer(client, query):
         return await query.answer("Permintaan sudah kedaluwarsa atau Tagall sedang berjalan.", show_alert=True)
 
     SPAM_CHATS.add(chat_id)
-    await query.answer(f"Tagall dimulai selama {minutes} menit.")
-    await query.message.edit_text(f"Tagall dimulai. Durasi: {minutes} menit.")
+    label = "Selamanya" if duration is None else f"{selected} menit"
+    await query.answer(f"Tagall dimulai: {label}.")
+    await query.message.edit_text(f"Tagall dimulai. Durasi: {label}.")
 
     asyncio.create_task(
         run_tagall(
@@ -112,19 +142,19 @@ async def start_tagall_timer(client, query):
             chat_id,
             pending["text"],
             pending["reply_id"],
-            minutes * 60,
+            duration,
         )
     )
 
 
 async def run_tagall(client, chat_id, text, reply_id, duration):
-    deadline = time.monotonic() + duration
+    deadline = None if duration is None else time.monotonic() + duration
     count = 0
     mentions = []
 
     try:
         async for member in client.get_chat_members(chat_id):
-            if chat_id not in SPAM_CHATS or time.monotonic() >= deadline:
+            if chat_id not in SPAM_CHATS or (deadline is not None and time.monotonic() >= deadline):
                 break
             if not member.user or member.user.is_bot or member.user.is_deleted:
                 continue
@@ -150,7 +180,7 @@ async def run_tagall(client, chat_id, text, reply_id, duration):
                         )
                 except FloodWait as error:
                     wait_seconds = getattr(error, "value", 1)
-                    if time.monotonic() + wait_seconds >= deadline:
+                    if deadline is not None and time.monotonic() + wait_seconds >= deadline:
                         break
                     await asyncio.sleep(wait_seconds)
                     continue
@@ -159,7 +189,7 @@ async def run_tagall(client, chat_id, text, reply_id, duration):
                 mentions.clear()
                 await asyncio.sleep(2)
 
-        if mentions and chat_id in SPAM_CHATS and time.monotonic() < deadline:
+        if mentions and chat_id in SPAM_CHATS and (deadline is None or time.monotonic() < deadline):
             body = "\n".join(mentions)
             if text:
                 body = f"<b>{text}</b>\n\n{body}"

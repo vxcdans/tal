@@ -6,3 +6,5 @@ __pycache__/
 *.session
 *.session-journal
 tagall_logs.txt
+.venv/
+*.backup
