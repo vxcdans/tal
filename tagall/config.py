@@ -1,24 +1,30 @@
-import os
 import logging
+import os
 from logging.handlers import RotatingFileHandler
 
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "9141890878:AAECYNgnCEJCK1sCqDDAZSau4yzSK9vQ-Fw")
-BOT_WORKERS = int(os.environ.get("BOT_WORKERS", "4"))
+from dotenv import load_dotenv
 
-APP_ID = int(os.environ.get("APP_ID", "29346197"))
-API_HASH = os.environ.get("API_HASH", "4de265464017f7a1342946f8a32d1a59")
+load_dotenv()
 
-LOGGER_ID = int(os.environ.get("LOGGER_ID", "-1004338630617)
+def required(name):
+    value = os.getenv(name)
+    if not value:
+        raise RuntimeError(f"Environment variable {name} belum diatur.")
+    return value
 
-MONGO_DB_URI = os.environ.get("MONGO_DB_URI", "mongodb+srv://germsnstus_db_user:JEVAGBlM9QjCdnI2@cluster0.6ccczyf.mongodb.net/EvoBot?retryWrites=true&w=majority&authSource=admin")
-DB_NAME = os.environ.get("DB_NAME", "germsnstus_db_user)
+BOT_TOKEN = required("BOT_TOKEN")
+APP_ID = int(required("APP_ID"))
+API_HASH = required("API_HASH")
+LOGGER_ID = int(required("LOGGER_ID"))
+MONGO_DB_URI = required("MONGO_DB_URI")
+DB_NAME = os.getenv("DB_NAME", "tagall")
+BOT_WORKERS = int(os.getenv("BOT_WORKERS", "4"))
+OWNER_NAME = os.getenv("OWNER_NAME", "Owner")
+OWNER_ID = [int(x) for x in os.getenv("OWNER_ID", "").replace(",", " ").split()]
+CREATOR = OWNER_ID
+
 BROADCAST_AS_COPY = True
-
 PLUG = dict(root="tagall/plugins")
-
-OWNER_ID = [int(x) for x in (os.environ.get("OWNER_ID", "8033557981").split())]
-OWNER_NAME = os.environ.get("OWNER_NAME", "@fvckdans")
-
 
 LOG_FILE_NAME = "tagall_logs.txt"
 logging.basicConfig(
@@ -34,6 +40,3 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 def LOGGER(name: str) -> logging.Logger:
     return logging.getLogger(name)
-
-CREATOR = [ 8033557981
-]
