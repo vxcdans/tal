@@ -33,14 +33,21 @@ def timer_keyboard(chat_id, user_id):
                     f"{minutes} menit",
                     callback_data=f"tagall_timer:{minutes}:{chat_id}:{user_id}",
                 )
-                for minutes in TIMER_OPTIONS[:3]
+                for minutes in TIMER_OPTIONS[:2]
             ],
             [
                 InlineKeyboardButton(
                     f"{minutes} menit",
                     callback_data=f"tagall_timer:{minutes}:{chat_id}:{user_id}",
                 )
-                for minutes in TIMER_OPTIONS[3:]
+                for minutes in TIMER_OPTIONS[2:4]
+            ],
+            [
+                InlineKeyboardButton(
+                    f"{minutes} menit",
+                    callback_data=f"tagall_timer:{minutes}:{chat_id}:{user_id}",
+                )
+                for minutes in TIMER_OPTIONS[4:]
             ],
         ]
     )
