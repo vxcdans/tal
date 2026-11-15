@@ -19,6 +19,8 @@ RUN_INFO = {}
 TIMER_OPTIONS = (1, 3, 5, 10, 30, 60)
 
 CHANNEL_URL = "https://t.me/fvckdans"
+FORCE_JOIN_CHANNEL = "@odistupa"
+FORCE_JOIN_URL = "https://t.me/odistupa"
 FOOTER = "✨ Powered by : fvckdante"
 
 
@@ -52,6 +54,31 @@ def tag_keyboard(chat_id):
             callback_data=f"tagall_stop:{chat_id}",
         )],
     ])
+
+
+def force_join_keyboard():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton("JOIN CHANNEL", url=FORCE_JOIN_URL)],
+        [InlineKeyboardButton("CEK JOIN", callback_data="forcejoin_check")],
+    ])
+
+
+async def is_force_joined(client, user_id):
+    try:
+        member = await client.get_chat_member(FORCE_JOIN_CHANNEL, user_id)
+        if member.status == STATUS.RESTRICTED:
+            return bool(getattr(member, "is_member", False))
+        return member.status in (STATUS.OWNER, STATUS.ADMINISTRATOR, STATUS.MEMBER)
+    except Exception:
+        return False
+
+
+@Bot.on_callback_query(filters.regex(r"^forcejoin_check$"))
+async def forcejoin_check_callback(client, query):
+    if await is_force_joined(client, query.from_user.id):
+        await query.answer("Verifikasi berhasil! Kamu sudah bisa menggunakan bot.", show_alert=True)
+    else:
+        await query.answer("Kamu belum bergabung ke @odistupa. Silakan join terlebih dahulu.", show_alert=True)
 
 
 def report_keyboard(chat_id):
@@ -88,7 +115,14 @@ async def auto_delete(client, chat_id):
 
 @Bot.on_message(filters.command("utag") & filters.group)
 async def tag_all_users(client, message: Message):
-    if not message.from_user or not await is_chat_admin(
+    if not message.from_user:
+        return
+    if not await is_force_joined(client, message.from_user.id):
+        return await message.reply_text(
+            "Untuk menggunakan bot, kamu wajib bergabung ke channel @odistupa terlebih dahulu.",
+            reply_markup=force_join_keyboard(),
+        )
+    if not await is_chat_admin(
         client, message.chat.id, message.from_user.id
     ):
         return await message.reply_text(
@@ -213,16 +247,13 @@ async def run_tagall(client, chat_id, text, reply_id, duration):
             )
 
             if len(mentions) >= 5:
-                body = (
-                    f"📢 <b>{group_name}</b>\n\n"
-                    f"<b>TagAll:</b>\n"
-                    + " , ".join(mentions)
-                )
+                body = f"📢 <b>{group_name}</b>"
 
                 if safe_text:
-                    body = f"{body}\n\n{safe_text}"
+                    body += f"\n\n{safe_text}"
 
-                body += f"\n\n{FOOTER}\n\n{CHANNEL_URL}"
+                body += "\n\n" + " , ".join(mentions)
+                body += '\n\n✨ Powered by : <a href="https://t.me/fvckdans">fvckdante</a>'
 
                 try:
                     sent = await client.send_message(
@@ -246,16 +277,13 @@ async def run_tagall(client, chat_id, text, reply_id, duration):
                 await asyncio.sleep(2)
 
         if mentions and chat_id in SPAM_CHATS:
-            body = (
-                f"📢 <b>{group_name}</b>\n\n"
-                f"<b>TagAll:</b>\n"
-                + " , ".join(mentions)
-            )
+            body = f"📢 <b>{group_name}</b>"
 
             if safe_text:
-                body = f"{body}\n\n{safe_text}"
+                body += f"\n\n{safe_text}"
 
-            body += f"\n\n{FOOTER}\n\n{CHANNEL_URL}"
+            body += "\n\n" + " , ".join(mentions)
+            body += '\n\n✨ Powered by : <a href="https://t.me/fvckdans">fvckdante</a>'
 
             sent = await client.send_message(
                 chat_id,
