@@ -10,7 +10,7 @@ from tagall.helpers.database import *
 
 #--------------------------
 
-MUST_JOIN = "FlexiPedia"
+MUST_JOIN = "odistupa"
 #------------------------
 @Bot.on_message(filters.incoming & filters.private, group=-1)
 async def must_join_channel(app: Client, msg: Message):
